@@ -10,7 +10,13 @@
 
 <body>
 
+<header>
+
 <h1>SmartHub Store</h1>
+
+<input type="text" id="search" placeholder="Search product..." onkeyup="searchProduct()">
+
+</header>
 
 <!-- LOGIN -->
 
@@ -32,6 +38,8 @@
 
 <h2>Products</h2>
 
+<div class="products" id="products">
+
 <div class="product">
 
 <img src="https://images.unsplash.com/photo-1585386959984-a4155224a1ad">
@@ -40,9 +48,7 @@
 
 <p>₹999</p>
 
-<button onclick="addToCart('Gaming Headphone',999)">
-Add to Cart
-</button>
+<button onclick="addToCart('Gaming Headphone',999)">Add to Cart</button>
 
 </div>
 
@@ -54,9 +60,7 @@ Add to Cart
 
 <p>₹1499</p>
 
-<button onclick="addToCart('Smart Watch',1499)">
-Add to Cart
-</button>
+<button onclick="addToCart('Smart Watch',1499)">Add to Cart</button>
 
 </div>
 
@@ -68,13 +72,13 @@ Add to Cart
 
 <p>₹799</p>
 
-<button onclick="addToCart('Bluetooth Speaker',799)">
-Add to Cart
-</button>
+<button onclick="addToCart('Bluetooth Speaker',799)">Add to Cart</button>
 
 </div>
 
-<h2>Cart</h2>
+</div>
+
+<h2>Your Cart</h2>
 
 <div id="cart"></div>
 
@@ -82,7 +86,9 @@ Add to Cart
 
 <input type="text" id="address" placeholder="Enter Address">
 
-<button onclick="order()">Order Now</button>
+<br><br>
+
+<button onclick="order()">Order on WhatsApp</button>
 
 </div>
 
