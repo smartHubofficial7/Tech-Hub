@@ -5,68 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tech Hub Store</title>
 
-<style>
+<link rel="stylesheet" href="style.css">
 
-body{
-font-family:Arial;
-margin:0;
-background:#f2f2f2;
-}
-
-header{
-background:#0f5132;
-color:white;
-text-align:center;
-padding:20px;
-}
-
-.products{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
-padding:20px;
-}
-
-.product{
-background:white;
-border-radius:10px;
-padding:15px;
-text-align:center;
-box-shadow:0 0 10px rgba(0,0,0,0.1);
-}
-
-.product img{
-width:100%;
-height:200px;
-object-fit:contain;
-}
-
-button{
-padding:8px 12px;
-margin:5px;
-border:none;
-border-radius:5px;
-cursor:pointer;
-}
-
-.cart{
-background:orange;
-color:white;
-}
-
-.buy{
-background:green;
-color:white;
-}
-
-footer{
-background:black;
-color:white;
-text-align:center;
-padding:15px;
-}
-
-</style>
 </head>
 
 <body>
@@ -81,48 +21,48 @@ padding:15px;
 <img src="https://m.media-amazon.com/images/I/71d7rfSl0wL._SX679_.jpg">
 <h3>iPhone 15</h3>
 <p>₹79999</p>
-<button class="cart">Add to Cart</button>
-<button class="buy">Buy</button>
+<button class="cart" onclick="addCart()">Add to Cart</button>
+<button class="buy" onclick="buy()">Buy</button>
 </div>
 
 <div class="product">
 <img src="https://m.media-amazon.com/images/I/71Sa3dqj9UL._SX679_.jpg">
 <h3>Samsung Galaxy S24</h3>
 <p>₹74999</p>
-<button class="cart">Add to Cart</button>
-<button class="buy">Buy</button>
+<button class="cart" onclick="addCart()">Add to Cart</button>
+<button class="buy" onclick="buy()">Buy</button>
 </div>
 
 <div class="product">
 <img src="https://m.media-amazon.com/images/I/61BAuSC0UnL._SX679_.jpg">
 <h3>OnePlus 12</h3>
 <p>₹64999</p>
-<button class="cart">Add to Cart</button>
-<button class="buy">Buy</button>
+<button class="cart" onclick="addCart()">Add to Cart</button>
+<button class="buy" onclick="buy()">Buy</button>
 </div>
 
 <div class="product">
 <img src="https://m.media-amazon.com/images/I/71TPda7cwUL._SX679_.jpg">
 <h3>MacBook Pro</h3>
 <p>₹150000</p>
-<button class="cart">Add to Cart</button>
-<button class="buy">Buy</button>
+<button class="cart" onclick="addCart()">Add to Cart</button>
+<button class="buy" onclick="buy()">Buy</button>
 </div>
 
 <div class="product">
 <img src="https://m.media-amazon.com/images/I/61uA2UVnYWL._SX679_.jpg">
 <h3>Boat Earbuds</h3>
 <p>₹1999</p>
-<button class="cart">Add to Cart</button>
-<button class="buy">Buy</button>
+<button class="cart" onclick="addCart()">Add to Cart</button>
+<button class="buy" onclick="buy()">Buy</button>
 </div>
 
 <div class="product">
 <img src="https://m.media-amazon.com/images/I/81hAz4hG7SL._SX679_.jpg">
 <h3>JBL Speaker</h3>
 <p>₹4999</p>
-<button class="cart">Add to Cart</button>
-<button class="buy">Buy</button>
+<button class="cart" onclick="addCart()">Add to Cart</button>
+<button class="buy" onclick="buy()">Buy</button>
 </div>
 
 </div>
@@ -130,6 +70,8 @@ padding:15px;
 <footer>
 <p>© 2026 Tech Hub Store</p>
 </footer>
+
+<script src="script.js"></script>
 
 </body>
 </html>
