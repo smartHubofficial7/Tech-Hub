@@ -1,10 +1,11 @@
-let cart = JSON.parse(localStorage.getItem("cart")) || []
-
-const cartDiv = document.getElementById("cartItems")
-
 function showCart(){
 
 cartDiv.innerHTML=""
+
+if(cart.length === 0){
+cartDiv.innerHTML="<h2 style='text-align:center'>Your cart is empty</h2>"
+return
+}
 
 cart.forEach((p,i)=>{
 
@@ -25,29 +26,5 @@ cartDiv.innerHTML += `
 `
 
 })
-
-}
-
-showCart()
-
-function removeItem(i){
-
-cart.splice(i,1)
-
-localStorage.setItem("cart",JSON.stringify(cart))
-
-showCart()
-
-}
-
-function checkout(){
-
-window.location.href="checkout.html"
-
-}
-
-function goBack(){
-
-window.location.href="index.html"
 
 }
