@@ -3,11 +3,15 @@ const products = [
 {name:"iPhone 15",price:79999,image:"https://m.media-amazon.com/images/I/71d7rfSl0wL._SX679_.jpg"},
 {name:"Samsung Galaxy S24",price:74999,image:"https://m.media-amazon.com/images/I/71LhG9F3qAL._SX679_.jpg"},
 {name:"OnePlus 12",price:64999,image:"https://m.media-amazon.com/images/I/61BAuSC0UnL._SX679_.jpg"},
-{name:"Sony Headphones",price:9999,image:"https://m.media-amazon.com/images/I/61vJtKBJYkL._SX679_.jpg"},
-{name:"Apple Watch",price:45000,image:"https://m.media-amazon.com/images/I/71F2XrYpQQL._SX679_.jpg"},
+{name:"MacBook Pro",price:150000,image:"https://m.media-amazon.com/images/I/71an9eiBxpL._SX679_.jpg"},
 {name:"Gaming Laptop",price:95000,image:"https://m.media-amazon.com/images/I/71TPda7cwUL._SX679_.jpg"},
+{name:"Sony Headphones",price:9999,image:"https://m.media-amazon.com/images/I/61vJtKBJYkL._SX679_.jpg"},
 {name:"Boat Earbuds",price:1999,image:"https://m.media-amazon.com/images/I/61KNJav3S9L._SX679_.jpg"},
-{name:"JBL Speaker",price:4999,image:"https://m.media-amazon.com/images/I/81R0dF+R5DL._SX679_.jpg"}
+{name:"JBL Speaker",price:4999,image:"https://m.media-amazon.com/images/I/81R0dF+R5DL._SX679_.jpg"},
+{name:"Apple Watch",price:45000,image:"https://m.media-amazon.com/images/I/71F2XrYpQQL._SX679_.jpg"},
+{name:"Realme Phone",price:18000,image:"https://m.media-amazon.com/images/I/81ZSn2rk9WL._SX679_.jpg"},
+{name:"Oppo Phone",price:20000,image:"https://m.media-amazon.com/images/I/61-r9zOKBCL._SX679_.jpg"},
+{name:"Vivo Phone",price:22000,image:"https://m.media-amazon.com/images/I/61l9ppRIiqL._SX679_.jpg"}
 
 ]
 
@@ -49,11 +53,9 @@ function addCart(i){
 
 cart.push(products[i])
 
-localStorage.setItem("cart", JSON.stringify(cart))
+localStorage.setItem("cart",JSON.stringify(cart))
 
 document.getElementById("cartCount").innerText = cart.length
-
-alert("Product added to cart")
 
 }
 
@@ -71,8 +73,8 @@ document.getElementById("loginBox").style.display="block"
 
 function login(){
 
-let name = document.getElementById("name").value
-let email = document.getElementById("email").value
+let name=document.getElementById("name").value
+let email=document.getElementById("email").value
 
 if(name=="" || email==""){
 alert("Fill details")
@@ -87,9 +89,9 @@ document.getElementById("loginBox").style.display="none"
 
 function searchProduct(){
 
-let value = document.getElementById("search").value.toLowerCase()
+let value=document.getElementById("search").value.toLowerCase()
 
-let filtered = products.filter(p =>
+let filtered=products.filter(p =>
 p.name.toLowerCase().includes(value)
 )
 
