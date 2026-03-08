@@ -1,76 +1,67 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <title>Tech Hub Store</title>
 <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<header class="navbar">
-
-<div class="logo">🛍 Tech Hub Store</div>
-
-<input id="search" placeholder="Search product..." onkeyup="searchProduct()">
-
-<a href="cart.html" class="cart-btn">
-🛒 Cart (<span id="count">0</span>)
-</a>
-
+<header>
+<h1>🛒 Tech Hub Store</h1>
+<a href="cart.html">Cart (<span id="count">0</span>)</a>
 </header>
 
-<section class="products">
+<div class="products">
 
 <div class="product">
-
 <img src="https://m.media-amazon.com/images/I/71d7rfSl0wL._SX679_.jpg">
-
 <h3>iPhone 15</h3>
+<p>₹79999</p>
 
-<p class="price">₹79999</p>
-
-<div class="buttons">
-
-<button onclick="addToCart('iPhone 15',79999)" class="cart">
-Add to Cart
+<button onclick="addToCart('iPhone 15',79999)">
+Add To Cart
 </button>
 
-<button onclick="buyNow('iPhone 15',79999)" class="buy">
+<button onclick="buyNow('iPhone 15',79999)">
 Buy Now
 </button>
 
 </div>
 
-</div>
 
 <div class="product">
+<img src="https://m.media-amazon.com/images/I/61HHS0HrjpL._SX679_.jpg">
+<h3>Samsung S23</h3>
+<p>₹69999</p>
 
-<img src="https://m.media-amazon.com/images/I/61uA2UVnYWL._SX679_.jpg">
-
-<h3>Boat Earbuds</h3>
-
-<p class="price">₹1999</p>
-
-<div class="buttons">
-
-<button onclick="addToCart('Boat Earbuds',1999)" class="cart">
-Add to Cart
+<button onclick="addToCart('Samsung S23',69999)">
+Add To Cart
 </button>
 
-<button onclick="buyNow('Boat Earbuds',1999)" class="buy">
+<button onclick="buyNow('Samsung S23',69999)">
+Buy Now
+</button>
+
+</div>
+
+
+<div class="product">
+<img src="https://m.media-amazon.com/images/I/71TPda7cwUL._SX679_.jpg">
+<h3>Boat Headphones</h3>
+<p>₹1999</p>
+
+<button onclick="addToCart('Boat Headphones',1999)">
+Add To Cart
+</button>
+
+<button onclick="buyNow('Boat Headphones',1999)">
 Buy Now
 </button>
 
 </div>
 
 </div>
-
-</section>
-
-<footer>
-© 2026 Tech Hub Store
-</footer>
 
 <script src="script.js"></script>
 
