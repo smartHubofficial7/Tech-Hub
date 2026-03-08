@@ -1,12 +1,84 @@
-<div id="checkout" class="page">
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmartHub Store</title>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<h1>SmartHub Store</h1>
+
+<!-- LOGIN -->
+<div id="loginBox">
+
+<h2>Login</h2>
+
+<input type="text" id="name" placeholder="Your Name">
+
+<input type="text" id="phone" placeholder="Phone Number">
+
+<button onclick="login()">Login</button>
+
+</div>
+
+<!-- STORE -->
+<div id="store" style="display:none;">
+
+<h2>Products</h2>
+
+<div class="product">
+
+<h3>Gaming Headphone</h3>
+
+<p>₹999</p>
+
+<button onclick="addToCart('Gaming Headphone',999)">
+Add to Cart
+</button>
+
+</div>
+
+<div class="product">
+
+<h3>Smart Watch</h3>
+
+<p>₹1499</p>
+
+<button onclick="addToCart('Smart Watch',1499)">
+Add to Cart
+</button>
+
+</div>
+
+<div class="product">
+
+<h3>Bluetooth Speaker</h3>
+
+<p>₹799</p>
+
+<button onclick="addToCart('Bluetooth Speaker',799)">
+Add to Cart
+</button>
+
+</div>
+
+<h2>Cart</h2>
+
+<div id="cart"></div>
 
 <h2>Delivery Address</h2>
 
-<input id="address" placeholder="Full Address">
-<input id="city" placeholder="City">
-<input id="state" placeholder="State">
-<input id="pincode" placeholder="Pincode">
+<input type="text" id="address" placeholder="Enter Address">
 
-<button class="btn" onclick="placeOrder()">Confirm Order</button>
+<button onclick="order()">Order Now</button>
 
 </div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
