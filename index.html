@@ -1,58 +1,79 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Tech Hub Store</title>
-
 <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body>
 
 <header>
+<h1>Tech Hub Store</h1>
 
-<h1>Tech Hub</h1>
-
-<input type="text" id="search" placeholder="Search product..." onkeyup="searchProduct()">
-
-<div class="cart" onclick="openCart()">
-🛒 Cart <span id="cartCount">0</span>
+<div class="nav">
+<a href="cart.html">🛒 Cart (<span id="cart-count">0</span>)</a>
 </div>
-
 </header>
 
-<nav>
+<section class="products">
 
-<a href="#">Home</a>
-<a href="#">Mobiles</a>
-<a href="#">Laptops</a>
-<a href="#">Headphones</a>
-<a href="#">Watches</a>
+<div class="product-card">
+<img src="https://m.media-amazon.com/images/I/71d7rfSl0wL._SX679_.jpg">
+<h3>iPhone 15</h3>
+<p>₹79999</p>
+<button onclick="addToCart('iPhone 15',79999)">Add to Cart</button>
+<button class="buy" onclick="buyNow('iPhone 15',79999)">Buy</button>
+</div>
 
-</nav>
+<div class="product-card">
+<img src="https://m.media-amazon.com/images/I/71Sa3dqj9UL._SX679_.jpg">
+<h3>Samsung Galaxy S24</h3>
+<p>₹74999</p>
+<button onclick="addToCart('Samsung Galaxy S24',74999)">Add to Cart</button>
+<button class="buy" onclick="buyNow('Samsung Galaxy S24',74999)">Buy</button>
+</div>
 
-<section class="banner">
+<div class="product-card">
+<img src="https://m.media-amazon.com/images/I/61BAuSC0UnL._SX679_.jpg">
+<h3>OnePlus 12</h3>
+<p>₹64999</p>
+<button onclick="addToCart('OnePlus 12',64999)">Add to Cart</button>
+<button class="buy" onclick="buyNow('OnePlus 12',64999)">Buy</button>
+</div>
 
-<h2>Big Tech Sale</h2>
-<p>Up to 50% OFF</p>
+<div class="product-card">
+<img src="https://m.media-amazon.com/images/I/71TPda7cwUL._SX679_.jpg">
+<h3>MacBook Pro</h3>
+<p>₹150000</p>
+<button onclick="addToCart('MacBook Pro',150000)">Add to Cart</button>
+<button class="buy" onclick="buyNow('MacBook Pro',150000)">Buy</button>
+</div>
+
+<div class="product-card">
+<img src="https://m.media-amazon.com/images/I/61uA2UVnYWL._SX679_.jpg">
+<h3>Boat Earbuds</h3>
+<p>₹1999</p>
+<button onclick="addToCart('Boat Earbuds',1999)">Add to Cart</button>
+<button class="buy" onclick="buyNow('Boat Earbuds',1999)">Buy</button>
+</div>
+
+<div class="product-card">
+<img src="https://m.media-amazon.com/images/I/81hAz4hG7SL._SX679_.jpg">
+<h3>JBL Speaker</h3>
+<p>₹4999</p>
+<button onclick="addToCart('JBL Speaker',4999)">Add to Cart</button>
+<button class="buy" onclick="buyNow('JBL Speaker',4999)">Buy</button>
+</div>
 
 </section>
 
-<section class="products" id="products"></section>
-
 <footer>
-
 <p>© 2026 Tech Hub Store</p>
-
 </footer>
 
 <script src="script.js"></script>
 
 </body>
-
 </html>
