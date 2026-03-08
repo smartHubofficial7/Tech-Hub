@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Payment</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+<h1>Complete Payment</h1>
+<a href="checkout.html" class="cart-btn">⬅ Back</a>
+</header>
+
+<div class="checkout">
+
+<h3>Scan QR Code to Pay</h3>
+
+<img src="qrcode.png" class="payment">
+
+<p>After payment click confirm order</p>
+
+<button onclick="placeOrder()">Confirm Order</button>
+
+</div>
+
+<script>
+
+function placeOrder(){
+
+let name=localStorage.getItem("orderName")
+let address=localStorage.getItem("orderAddress")
+let phone=localStorage.getItem("orderPhone")
+
+let cart=JSON.parse(localStorage.getItem("cart"))||[]
+
+let items=""
+
+cart.forEach(item=>{
+items+=item.name+" ₹"+item.price+"\n"
+})
+
+let msg=
+"NEW ORDER\n\n"+
+"Name:"+name+"\n"+
+"Phone:"+phone+"\n"+
+"Address:"+address+"\n\n"+
+"Products:\n"+items
+
+let url="https://api.whatsapp.com/send?phone=918481944109&text="+encodeURIComponent(msg)
+
+window.open(url)
+
+localStorage.removeItem("cart")
+
+}
+
+</script>
+
+</body>
+</html>
