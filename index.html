@@ -8,8 +8,9 @@
 
 <body>
 
-<header>
-<h1>Tech Hub Store</h1>
+<header class="navbar">
+
+<div class="logo">🛍 Tech Hub Store</div>
 
 <input id="search" placeholder="Search product..." onkeyup="searchProduct()">
 
@@ -22,19 +23,47 @@
 <section class="products">
 
 <div class="product">
+
 <img src="https://m.media-amazon.com/images/I/71d7rfSl0wL._SX679_.jpg">
+
 <h3>iPhone 15</h3>
-<p>₹79999</p>
-<button onclick="addToCart('iPhone 15',79999)">Add to Cart</button>
-<button onclick="buyNow('iPhone 15',79999)" class="buy">Buy Now</button>
+
+<p class="price">₹79999</p>
+
+<div class="buttons">
+
+<button onclick="addToCart('iPhone 15',79999)" class="cart">
+Add to Cart
+</button>
+
+<button onclick="buyNow('iPhone 15',79999)" class="buy">
+Buy Now
+</button>
+
+</div>
+
 </div>
 
 <div class="product">
+
 <img src="https://m.media-amazon.com/images/I/61uA2UVnYWL._SX679_.jpg">
+
 <h3>Boat Earbuds</h3>
-<p>₹1999</p>
-<button onclick="addToCart('Boat Earbuds',1999)">Add to Cart</button>
-<button onclick="buyNow('Boat Earbuds',1999)" class="buy">Buy Now</button>
+
+<p class="price">₹1999</p>
+
+<div class="buttons">
+
+<button onclick="addToCart('Boat Earbuds',1999)" class="cart">
+Add to Cart
+</button>
+
+<button onclick="buyNow('Boat Earbuds',1999)" class="buy">
+Buy Now
+</button>
+
+</div>
+
 </div>
 
 </section>
