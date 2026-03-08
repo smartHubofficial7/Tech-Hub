@@ -7,43 +7,35 @@
 
 <body>
 
-<header class="navbar">
+<h2>Enter Your Details</h2>
 
-<div class="logo">Checkout</div>
-
-<a href="cart.html" class="cart-btn">⬅ Back</a>
-
-</header>
-
-<div class="checkout">
-
-<input id="name" placeholder="Full Name">
-
-<input id="address" placeholder="Address">
+<input id="name" placeholder="Your Name">
 
 <input id="phone" placeholder="Phone Number">
 
-<button onclick="goPayment()">Continue to Payment</button>
+<input id="address" placeholder="Address">
+
+<br><br>
+
+<button onclick="showPayment()">
+Continue To Payment
+</button>
+
+<div id="payment" style="display:none">
+
+<h3>Scan QR Code To Pay</h3>
+
+<img src="qrcode.png" width="200">
+
+<br><br>
+
+<button onclick="confirmOrder()">
+I Have Paid
+</button>
 
 </div>
 
-<script>
-
-function goPayment(){
-
-let name=document.getElementById("name").value
-let address=document.getElementById("address").value
-let phone=document.getElementById("phone").value
-
-localStorage.setItem("orderName",name)
-localStorage.setItem("orderAddress",address)
-localStorage.setItem("orderPhone",phone)
-
-window.location.href="payment.html"
-
-}
-
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
