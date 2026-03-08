@@ -1,11 +1,11 @@
 body{
 font-family:Arial;
 margin:0;
-background:#f2f2f2;
+background:#f4f4f4;
 }
 
 header{
-background:#0f5132;
+background:#111;
 color:white;
 padding:15px;
 display:flex;
@@ -41,9 +41,9 @@ object-fit:contain;
 }
 
 button{
-padding:8px 12px;
+padding:10px 15px;
 border:none;
-background:orange;
+background:#ff9800;
 color:white;
 border-radius:5px;
 cursor:pointer;
@@ -51,11 +51,35 @@ margin:5px;
 }
 
 .buy{
-background:green;
+background:#28a745;
+}
+
+.cart-item{
+background:white;
+margin:20px;
+padding:15px;
+border-radius:8px;
+}
+
+.checkout{
+padding:20px;
+display:flex;
+flex-direction:column;
+gap:10px;
+max-width:300px;
+}
+
+.checkout input{
+padding:10px;
+}
+
+.payment{
+width:200px;
+margin:10px 0;
 }
 
 footer{
-background:black;
+background:#111;
 color:white;
 text-align:center;
 padding:15px;
