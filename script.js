@@ -11,7 +11,9 @@ const products = [
 
 ]
 
-let cart = []
+let cart = JSON.parse(localStorage.getItem("cart")) || []
+
+document.getElementById("cartCount").innerText = cart.length
 
 function showProducts(list){
 
@@ -47,7 +49,17 @@ function addCart(i){
 
 cart.push(products[i])
 
+localStorage.setItem("cart", JSON.stringify(cart))
+
 document.getElementById("cartCount").innerText = cart.length
+
+alert("Product added to cart")
+
+}
+
+function openCart(){
+
+window.location.href="cart.html"
 
 }
 
