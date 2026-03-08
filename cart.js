@@ -10,12 +10,9 @@ total+=item.price
 
 div.innerHTML+=`
 <div class="cart-item">
-
 <h3>${item.name}</h3>
 <p>₹${item.price}</p>
-
 <button onclick="removeItem(${index})">Remove</button>
-
 </div>
 `
 
