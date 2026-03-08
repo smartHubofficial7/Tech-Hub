@@ -25,7 +25,7 @@
 
 <h3>Scan & Pay</h3>
 
-<img src="SMARTHUB-1024.jpeg" class="payment">
+<img src="qrcode.png" class="payment">
 
 <button onclick="placeOrder()">Confirm Order</button>
 
@@ -36,9 +36,7 @@
 function placeOrder(){
 
 let name=document.getElementById("name").value
-
 let address=document.getElementById("address").value
-
 let phone=document.getElementById("phone").value
 
 let cart=JSON.parse(localStorage.getItem("cart"))||[]
@@ -46,21 +44,14 @@ let cart=JSON.parse(localStorage.getItem("cart"))||[]
 let items=""
 
 cart.forEach(item=>{
-
 items+=item.name+" ₹"+item.price+"\n"
-
 })
 
 let msg=
-
 "NEW ORDER\n\n"+
-
 "Name:"+name+"\n"+
-
 "Phone:"+phone+"\n"+
-
 "Address:"+address+"\n\n"+
-
 "Products:\n"+items
 
 let url="https://api.whatsapp.com/send?phone=918481944109&text="+encodeURIComponent(msg)
