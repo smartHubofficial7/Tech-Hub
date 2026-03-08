@@ -1,7 +1,13 @@
-fetch("http://localhost:3000/order",{
-method:"POST",
-headers:{
-"Content-Type":"application/json"
-},
-body:JSON.stringify(orderData)
-})
+function checkout(){
+
+let user = localStorage.getItem("user")
+
+if(!user){
+alert("Please login first")
+showPage("login")
+return
+}
+
+showPage("checkout")
+
+}
