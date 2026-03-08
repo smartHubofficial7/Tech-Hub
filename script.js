@@ -38,7 +38,7 @@ container.innerHTML += `
 
 <button class="cartBtn" onclick="addCart(${i})">Add to Cart</button>
 
-<button class="buy" onclick="buyProduct()">Buy</button>
+<button class="buy" onclick="buyNow(${i})">Buy</button>
 
 </div>
 `
@@ -65,25 +65,13 @@ window.location.href="cart.html"
 
 }
 
-function buyProduct(){
+function buyNow(i){
 
-document.getElementById("loginBox").style.display="block"
+cart.push(products[i])
 
-}
+localStorage.setItem("cart",JSON.stringify(cart))
 
-function login(){
-
-let name=document.getElementById("name").value
-let email=document.getElementById("email").value
-
-if(name=="" || email==""){
-alert("Fill details")
-return
-}
-
-alert("Login Successful")
-
-document.getElementById("loginBox").style.display="none"
+window.location.href="cart.html"
 
 }
 
