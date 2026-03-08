@@ -11,21 +11,51 @@
 <h1>Checkout</h1>
 </header>
 
-<h2 style="padding:20px">Enter Address</h2>
+<div class="checkout">
 
-<div style="padding:20px">
-<input placeholder="Full Name"><br><br>
-<input placeholder="Address"><br><br>
-<input placeholder="Phone Number"><br><br>
-<button onclick="order()">Place Order</button>
+<input id="name" placeholder="Full Name">
+<input id="address" placeholder="Address">
+<input id="phone" placeholder="Phone Number">
+
+<h3>Scan & Pay</h3>
+
+<img src="SMARTHUB-1024.jpeg" class="payment">
+
+<button onclick="placeOrder()">Confirm Order</button>
+
 </div>
 
 <script>
-function order(){
-    alert("Order Placed Successfully");
-    localStorage.removeItem("cart");
-    window.location.href="index.html";
+
+function placeOrder(){
+
+let name=document.getElementById("name").value
+let address=document.getElementById("address").value
+let phone=document.getElementById("phone").value
+
+let cart=JSON.parse(localStorage.getItem("cart"))||[]
+
+let items=""
+
+cart.forEach(item=>{
+items+=item.name+" ₹"+item.price+"%0A"
+})
+
+let message=
+"NEW ORDER%0A%0A"+
+"Name:"+name+"%0A"+
+"Phone:"+phone+"%0A"+
+"Address:"+address+"%0A%0A"+
+"Products:%0A"+items
+
+let url="https://wa.me/918481944109?text="+message
+
+window.location.href=url
+
+localStorage.removeItem("cart")
+
 }
+
 </script>
 
 </body>
