@@ -3,92 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SmartHub Store</title>
+<title>Tech Hub Store</title>
 
 <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
 <header>
-
-<h1>SmartHub Store</h1>
-
-<input type="text" id="search" placeholder="Search product..." onkeyup="searchProduct()">
-
+<h1>Tech Hub Store</h1>
 </header>
 
-<!-- LOGIN -->
+<section class="products" id="products"></section>
 
-<div id="loginBox">
+<!-- LOGIN POPUP -->
 
-<h2>Login</h2>
+<div id="loginBox" class="loginBox">
 
-<input type="text" id="name" placeholder="Your Name">
+<h2>Login Required</h2>
 
-<input type="text" id="phone" placeholder="Phone Number">
+<input type="text" id="name" placeholder="Enter Name">
+<input type="email" id="email" placeholder="Enter Email">
 
 <button onclick="login()">Login</button>
-
-</div>
-
-<!-- STORE -->
-
-<div id="store" style="display:none;">
-
-<h2>Products</h2>
-
-<div class="products" id="products">
-
-<div class="product">
-
-<img src="https://images.unsplash.com/photo-1585386959984-a4155224a1ad">
-
-<h3>Gaming Headphone</h3>
-
-<p>₹999</p>
-
-<button onclick="addToCart('Gaming Headphone',999)">Add to Cart</button>
-
-</div>
-
-<div class="product">
-
-<img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12">
-
-<h3>Smart Watch</h3>
-
-<p>₹1499</p>
-
-<button onclick="addToCart('Smart Watch',1499)">Add to Cart</button>
-
-</div>
-
-<div class="product">
-
-<img src="https://images.unsplash.com/photo-1589003077984-894e133dabab">
-
-<h3>Bluetooth Speaker</h3>
-
-<p>₹799</p>
-
-<button onclick="addToCart('Bluetooth Speaker',799)">Add to Cart</button>
-
-</div>
-
-</div>
-
-<h2>Your Cart</h2>
-
-<div id="cart"></div>
-
-<h2>Delivery Address</h2>
-
-<input type="text" id="address" placeholder="Enter Address">
-
-<br><br>
-
-<button onclick="order()">Order on WhatsApp</button>
 
 </div>
 
