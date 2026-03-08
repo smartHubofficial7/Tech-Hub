@@ -9,8 +9,17 @@ background:#f4f4f4;
 .product{
 
 background:white;
-margin:10px;
+margin:20px;
 padding:15px;
+border-radius:10px;
+display:inline-block;
+width:250px;
+
+}
+
+.product img{
+
+width:100%;
 border-radius:10px;
 
 }
