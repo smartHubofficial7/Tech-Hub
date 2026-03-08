@@ -1,18 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Checkout</title>
+<title>Checkout - Information</title>
 <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
 <header>
-
-<h1>Checkout</h1>
-
+<h1>Enter Your Details</h1>
 <a href="cart.html" class="cart-btn">⬅ Back</a>
-
 </header>
 
 <div class="checkout">
@@ -23,42 +20,23 @@
 
 <input id="phone" placeholder="Phone Number">
 
-<h3>Scan & Pay</h3>
-
-<img src="qrcode.png" class="payment">
-
-<button onclick="placeOrder()">Confirm Order</button>
+<button onclick="goPayment()">Continue to Payment</button>
 
 </div>
 
 <script>
 
-function placeOrder(){
+function goPayment(){
 
 let name=document.getElementById("name").value
 let address=document.getElementById("address").value
 let phone=document.getElementById("phone").value
 
-let cart=JSON.parse(localStorage.getItem("cart"))||[]
+localStorage.setItem("orderName",name)
+localStorage.setItem("orderAddress",address)
+localStorage.setItem("orderPhone",phone)
 
-let items=""
-
-cart.forEach(item=>{
-items+=item.name+" ₹"+item.price+"\n"
-})
-
-let msg=
-"NEW ORDER\n\n"+
-"Name:"+name+"\n"+
-"Phone:"+phone+"\n"+
-"Address:"+address+"\n\n"+
-"Products:\n"+items
-
-let url="https://api.whatsapp.com/send?phone=918481944109&text="+encodeURIComponent(msg)
-
-window.open(url)
-
-localStorage.removeItem("cart")
+window.location.href="payment.html"
 
 }
 
