@@ -8,14 +8,19 @@
 <body>
 
 <header>
+
 <h1>Checkout</h1>
-<a href="cart.html" class="cart-btn">⬅ Back to Cart</a>
+
+<a href="cart.html" class="cart-btn">⬅ Back</a>
+
 </header>
 
 <div class="checkout">
 
 <input id="name" placeholder="Full Name">
+
 <input id="address" placeholder="Address">
+
 <input id="phone" placeholder="Phone Number">
 
 <h3>Scan & Pay</h3>
@@ -24,12 +29,6 @@
 
 <button onclick="placeOrder()">Confirm Order</button>
 
-<br>
-
-<a href="index.html">
-<button>⬅ Back to Store</button>
-</a>
-
 </div>
 
 <script>
@@ -37,7 +36,9 @@
 function placeOrder(){
 
 let name=document.getElementById("name").value
+
 let address=document.getElementById("address").value
+
 let phone=document.getElementById("phone").value
 
 let cart=JSON.parse(localStorage.getItem("cart"))||[]
@@ -45,19 +46,26 @@ let cart=JSON.parse(localStorage.getItem("cart"))||[]
 let items=""
 
 cart.forEach(item=>{
-items+=item.name+" ₹"+item.price+"%0A"
+
+items+=item.name+" ₹"+item.price+"\n"
+
 })
 
-let message=
-"NEW ORDER%0A%0A"+
-"Name:"+name+"%0A"+
-"Phone:"+phone+"%0A"+
-"Address:"+address+"%0A%0A"+
-"Products:%0A"+items
+let msg=
 
-let url="https://wa.me/918481944109?text="+message
+"NEW ORDER\n\n"+
 
-window.location.href=url
+"Name:"+name+"\n"+
+
+"Phone:"+phone+"\n"+
+
+"Address:"+address+"\n\n"+
+
+"Products:\n"+items
+
+let url="https://api.whatsapp.com/send?phone=918481944109&text="+encodeURIComponent(msg)
+
+window.open(url)
 
 localStorage.removeItem("cart")
 
