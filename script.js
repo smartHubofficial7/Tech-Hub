@@ -1,82 +1,113 @@
-let cart = JSON.parse(localStorage.getItem("cart")) || []
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-function addToCart(name,price){
+// UPDATE CART COUNT
+function updateCount() {
+let c = document.getElementById("count");
+if (c) {
+c.innerText = cart.length;
+}
+}
 
-cart.push({name,price})
+// ADD TO CART
+function addToCart(name, price) {
 
-localStorage.setItem("cart",JSON.stringify(cart))
+cart.push({ name, price });
 
-alert("Added To Cart")
+localStorage.setItem("cart", JSON.stringify(cart));
 
-updateCount()
+alert("Added To Cart 🛒");
+
+updateCount();
+}
+
+// BUY NOW
+function buyNow(name, price) {
+
+cart = [{ name, price }];
+
+localStorage.setItem("cart", JSON.stringify(cart));
+
+window.location = "checkout.html";
+}
+
+// SHOW CART ITEMS
+function showCart() {
+
+let div = document.getElementById("cartItems");
+
+if (!div) return;
+
+let html = "";
+let total = 0;
+
+cart.forEach((item, index) => {
+
+total += item.price;
+
+html += `
+<p>
+${item.name} - ₹${item.price}
+<button onclick="removeItem(${index})">❌</button>
+</p>
+`;
+
+});
+
+html += `<h3>Total: ₹${total}</h3>`;
+
+div.innerHTML = html;
+}
+
+// REMOVE ITEM
+function removeItem(index) {
+
+cart.splice(index, 1);
+
+localStorage.setItem("cart", JSON.stringify(cart));
+
+showCart();
+
+updateCount();
+}
+
+// GO TO CHECKOUT
+function goCheckout() {
+
+if (cart.length === 0) {
+
+alert("Cart is empty");
+
+return;
 
 }
 
-function buyNow(name,price){
+window.location = "checkout.html";
+}
 
-cart=[{name,price}]
+// SHOW PAYMENT
+function showPayment() {
 
-localStorage.setItem("cart",JSON.stringify(cart))
+let name = document.getElementById("name").value;
+let phone = document.getElementById("phone").value;
+let address = document.getElementById("address").value;
 
-window.location="checkout.html"
+if (name === "" || phone === "" || address === "") {
+
+alert("Please fill all details");
+
+return;
 
 }
 
-function updateCount(){
-
-let c=document.getElementById("count")
-
-if(c)c.innerText=cart.length
-
+document.getElementById("payment").style.display = "block";
 }
 
-updateCount()
+// CONFIRM ORDER
+function confirmOrder() {
 
-
-
-function showCart(){
-
-let div=document.getElementById("cartItems")
-
-if(!div) return
-
-let html=""
-
-cart.forEach(item=>{
-
-html+=`<p>${item.name} - ₹${item.price}</p>`
-
-})
-
-div.innerHTML=html
-
-}
-
-showCart()
-
-
-
-function goCheckout(){
-
-window.location="checkout.html"
-
-}
-
-
-
-function showPayment(){
-
-document.getElementById("payment").style.display="block"
-
-}
-
-
-
-function confirmOrder(){
-
-let name=document.getElementById("name").value
-let phone=document.getElementById("phone").value
-let address=document.getElementById("address").value
+let name = document.getElementById("name").value
+let phone = document.getElementById("phone").value
+let address = document.getElementById("address").value
 
 let order="🛒 NEW ORDER%0A%0A"
 
@@ -86,10 +117,19 @@ order+=`${i.name} - ₹${i.price}%0A`
 
 order+=`%0A👤 Name: ${name}%0A📞 Phone: ${phone}%0A📍 Address: ${address}`
 
-window.location=`https://wa.me/YOURNUMBER?text=${order}`
+// YOUR WHATSAPP NUMBER
+window.location=`https://wa.me/918481944109?text=${order}`
 
-alert("Order Confirmed")
+alert("Order Confirmed ✅")
 
 localStorage.removeItem("cart")
 
+cart=[]
+
+updateCount()
+
 }
+
+// RUN FUNCTIONS
+updateCount();
+showCart();
