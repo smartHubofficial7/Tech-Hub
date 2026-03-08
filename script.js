@@ -1,88 +1,31 @@
-const products = [
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-{name:"iPhone 15",price:79999,image:"https://m.media-amazon.com/images/I/71d7rfSl0wL._SX679_.jpg"},
-{name:"Samsung Galaxy S24",price:74999,image:"https://m.media-amazon.com/images/I/71LhG9F3qAL._SX679_.jpg"},
-{name:"OnePlus 12",price:64999,image:"https://m.media-amazon.com/images/I/61BAuSC0UnL._SX679_.jpg"},
-{name:"MacBook Pro",price:150000,image:"https://m.media-amazon.com/images/I/71an9eiBxpL._SX679_.jpg"},
-{name:"Gaming Laptop",price:95000,image:"https://m.media-amazon.com/images/I/71TPda7cwUL._SX679_.jpg"},
-{name:"Sony Headphones",price:9999,image:"https://m.media-amazon.com/images/I/61vJtKBJYkL._SX679_.jpg"},
-{name:"Boat Earbuds",price:1999,image:"https://m.media-amazon.com/images/I/61KNJav3S9L._SX679_.jpg"},
-{name:"JBL Speaker",price:4999,image:"https://m.media-amazon.com/images/I/81R0dF+R5DL._SX679_.jpg"},
-{name:"Apple Watch",price:45000,image:"https://m.media-amazon.com/images/I/71F2XrYpQQL._SX679_.jpg"},
-{name:"Realme Phone",price:18000,image:"https://m.media-amazon.com/images/I/81ZSn2rk9WL._SX679_.jpg"},
-{name:"Oppo Phone",price:20000,image:"https://m.media-amazon.com/images/I/61-r9zOKBCL._SX679_.jpg"},
-{name:"Vivo Phone",price:22000,image:"https://m.media-amazon.com/images/I/61l9ppRIiqL._SX679_.jpg"}
-
-]
-
-let cart = JSON.parse(localStorage.getItem("cart")) || []
-
-document.getElementById("cartCount").innerText = cart.length
-
-function showProducts(list){
-
-const container = document.getElementById("products")
-
-container.innerHTML=""
-
-list.forEach((p,i)=>{
-
-container.innerHTML += `
-<div class="card">
-
-<img src="${p.image}">
-
-<h3>${p.name}</h3>
-
-<p>₹${p.price}</p>
-
-<button class="cartBtn" onclick="addCart(${i})">Add to Cart</button>
-
-<button class="buy" onclick="buyNow(${i})">Buy</button>
-
-</div>
-`
-
-})
-
+function updateCart(){
+document.getElementById("cart-count").innerText = cart.length;
 }
 
-showProducts(products)
+updateCart();
 
-function addCart(i){
+function addToCart(name,price){
 
-cart.push(products[i])
+cart.push({name,price});
 
-localStorage.setItem("cart",JSON.stringify(cart))
+localStorage.setItem("cart",JSON.stringify(cart));
 
-document.getElementById("cartCount").innerText = cart.length
+updateCart();
 
+alert(name + " added to cart");
 }
 
-function openCart(){
+function buyNow(name,price){
 
-window.location.href="cart.html"
+let user = localStorage.getItem("user");
 
+if(!user){
+alert("Please login first");
+window.location.href="login.html";
+return;
 }
 
-function buyNow(i){
-
-cart.push(products[i])
-
-localStorage.setItem("cart",JSON.stringify(cart))
-
-window.location.href="cart.html"
-
-}
-
-function searchProduct(){
-
-let value=document.getElementById("search").value.toLowerCase()
-
-let filtered=products.filter(p =>
-p.name.toLowerCase().includes(value)
-)
-
-showProducts(filtered)
-
+alert("Order placed for " + name);
 }
