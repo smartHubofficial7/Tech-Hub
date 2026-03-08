@@ -6,7 +6,7 @@ function showCart(){
 
 cartDiv.innerHTML=""
 
-if(cart.length === 0){
+if(cart.length===0){
 
 cartDiv.innerHTML="<h2 style='text-align:center'>Your cart is empty</h2>"
 
@@ -16,7 +16,7 @@ return
 
 }
 
-let total = 0
+let total=0
 
 cart.forEach((p,i)=>{
 
