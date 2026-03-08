@@ -6,7 +6,7 @@ function showCart(){
 
 cartDiv.innerHTML=""
 
-cart.forEach(p => {
+cart.forEach((p,i)=>{
 
 cartDiv.innerHTML += `
 
@@ -18,6 +18,8 @@ cartDiv.innerHTML += `
 
 <p>₹${p.price}</p>
 
+<button onclick="removeItem(${i})">Remove</button>
+
 </div>
 
 `
@@ -28,8 +30,24 @@ cartDiv.innerHTML += `
 
 showCart()
 
+function removeItem(i){
+
+cart.splice(i,1)
+
+localStorage.setItem("cart",JSON.stringify(cart))
+
+showCart()
+
+}
+
 function checkout(){
 
 window.location.href="checkout.html"
+
+}
+
+function goBack(){
+
+window.location.href="index.html"
 
 }
