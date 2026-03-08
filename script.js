@@ -1,31 +1,11 @@
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
+function addCart(){
 
-function updateCart(){
-document.getElementById("cart-count").innerText = cart.length;
+alert("Product Added to Cart");
+
 }
 
-updateCart();
+function buy(){
 
-function addToCart(name,price){
+alert("Proceed to Buy");
 
-cart.push({name,price});
-
-localStorage.setItem("cart",JSON.stringify(cart));
-
-updateCart();
-
-alert(name + " added to cart");
-}
-
-function buyNow(name,price){
-
-let user = localStorage.getItem("user");
-
-if(!user){
-alert("Please login first");
-window.location.href="login.html";
-return;
-}
-
-alert("Order placed for " + name);
 }
