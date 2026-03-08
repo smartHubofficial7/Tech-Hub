@@ -1,47 +1,87 @@
 let cart = JSON.parse(localStorage.getItem("cart")) || []
 
-updateCartCount()
-
 function addToCart(name,price){
 
 cart.push({name,price})
 
 localStorage.setItem("cart",JSON.stringify(cart))
 
-updateCartCount()
+alert("Added To Cart")
 
-alert(name+" added to cart")
+updateCount()
 
 }
 
 function buyNow(name,price){
 
-addToCart(name,price)
+cart=[{name,price}]
 
-window.location.href="checkout.html"
+localStorage.setItem("cart",JSON.stringify(cart))
+
+window.location="checkout.html"
 
 }
 
-function updateCartCount(){
+function updateCount(){
 
 let c=document.getElementById("count")
 
-if(c) c.innerText=cart.length
+if(c)c.innerText=cart.length
 
 }
 
-function searchProduct(){
+updateCount()
 
-let input=document.getElementById("search").value.toLowerCase()
 
-let products=document.querySelectorAll(".product")
+function showCart(){
 
-products.forEach(p=>{
+let div=document.getElementById("cartItems")
 
-let name=p.querySelector("h3").innerText.toLowerCase()
+if(!div) return
 
-p.style.display=name.includes(input)?"block":"none"
+let html=""
 
+cart.forEach(item=>{
+html+=`<p>${item.name} - ₹${item.price}</p>`
 })
+
+div.innerHTML=html
+
+}
+
+showCart()
+
+
+function checkout(){
+
+window.location="checkout.html"
+
+}
+
+function showPayment(){
+
+document.getElementById("payment").style.display="block"
+
+}
+
+function confirmOrder(){
+
+let name=document.getElementById("name").value
+let phone=document.getElementById("phone").value
+let address=document.getElementById("address").value
+
+let order="New Order%0A"
+
+cart.forEach(i=>{
+order+=`${i.name} ₹${i.price}%0A`
+})
+
+order+=`%0AName:${name}%0APhone:${phone}%0AAddress:${address}`
+
+window.location=`https://wa.me/YOURNUMBER?text=${order}`
+
+alert("Order Confirmed")
+
+localStorage.removeItem("cart")
 
 }
