@@ -24,7 +24,9 @@ window.location.href="checkout.html"
 
 function updateCartCount(){
 
-document.getElementById("count").innerText=cart.length
+let c=document.getElementById("count")
+
+if(c) c.innerText=cart.length
 
 }
 
