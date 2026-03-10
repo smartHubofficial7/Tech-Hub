@@ -1,43 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 <title>Checkout</title>
-<link rel="stylesheet" href="style.css">
-
 </head>
 
 <body>
 
-<h2>Enter Your Information</h2>
+<h1>Checkout</h1>
 
-<input id="name" placeholder="Your Name">
+<input placeholder="Name"><br><br>
+<input placeholder="Address"><br><br>
+<input placeholder="Phone"><br><br>
 
-<input id="phone" placeholder="Phone Number">
-
-<input id="address" placeholder="Delivery Address">
-
-<br><br>
-
-<button onclick="showPayment()">
-Continue To Payment
-</button>
-
-<div id="payment" style="display:none">
-
-<h3>Scan QR Code To Pay</h3>
-
-<img src="qrcode.png" width="220">
-
-<br><br>
-
-<button onclick="confirmOrder()">
-I Have Paid
-</button>
-
-</div>
-
-<script src="script.js"></script>
+<a href="payment.html">Proceed to Payment</a>
 
 </body>
 </html>
