@@ -1,33 +1,728 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Tech Hub Store</title>
-<link rel="stylesheet" href="css/style.css">
-</head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmartHub — India's Tech Store</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d0d0d;--bg2:#161616;--bg3:#1e1e1e;--bg4:#252525;
+  --gold:#f0b429;--gold2:#d4a017;
+  --white:#fff;--gray:#a0a0a0;--gray2:#6b6b6b;--border:#2a2a2a;
+  --red:#e53e3e;--green:#38a169;--wa:#25D366;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--white);min-height:100vh}
+.topbar{background:#000;padding:0.35rem 1.5rem;display:flex;align-items:center;justify-content:space-between;font-size:0.72rem;color:var(--gray)}
+.topbar a{color:var(--gold);text-decoration:none}
+nav{background:#111;padding:0.7rem 1.5rem;display:flex;align-items:center;gap:1rem;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:200}
+.nav-logo{font-size:1.5rem;font-weight:700;color:var(--gold);text-decoration:none;flex-shrink:0;letter-spacing:-0.03em}
+.nav-logo span{color:var(--white)}
+.search-wrap{flex:1;display:flex;max-width:600px}
+.search-wrap input{flex:1;padding:0.6rem 1rem;background:var(--white);color:#111;border:none;border-radius:0.5rem 0 0 0.5rem;font-size:0.875rem;outline:none;font-family:'Inter',sans-serif}
+.search-wrap button{background:var(--gold);border:none;padding:0 1.1rem;border-radius:0 0.5rem 0.5rem 0;cursor:pointer;font-size:1rem}
+.nav-right{display:flex;align-items:center;gap:1.25rem;margin-left:auto}
+.nav-link{color:var(--white);text-decoration:none;font-size:0.78rem;display:flex;flex-direction:column;line-height:1.3;cursor:pointer}
+.nav-link small{color:var(--gray);font-size:0.68rem}
+.cart-btn{display:flex;align-items:center;gap:0.4rem;background:var(--gold);color:#111;padding:0.45rem 1rem;border-radius:0.5rem;font-weight:700;font-size:0.82rem;cursor:pointer;border:none;font-family:'Inter',sans-serif}
+.cart-badge{background:#c45500;color:#fff;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:0.68rem;font-weight:700}
+.nav-cats{background:#1a1a1a;padding:0.5rem 1.5rem;display:flex;gap:1.5rem;overflow-x:auto;border-bottom:1px solid var(--border)}
+.nav-cats::-webkit-scrollbar{display:none}
+.nav-cat{color:var(--gray);font-size:0.8rem;cursor:pointer;white-space:nowrap;padding:0.25rem 0;transition:color 0.2s;border-bottom:2px solid transparent}
+.nav-cat:hover,.nav-cat.active{color:var(--gold);border-bottom-color:var(--gold)}
+.hero-banner{background:linear-gradient(135deg,#1a0f00 0%,#0d0d0d 50%,#001a0f 100%);padding:3rem 2rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;overflow:hidden}
+.hero-text h1{font-size:clamp(1.8rem,4vw,3rem);font-weight:700;line-height:1.15;margin-bottom:0.75rem}
+.hero-text h1 span{color:var(--gold)}
+.hero-text p{color:var(--gray);font-size:0.95rem;margin-bottom:1.5rem;max-width:400px}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-gold{background:var(--gold);color:#111;padding:0.75rem 2rem;border-radius:2rem;font-weight:700;font-size:0.9rem;border:none;cursor:pointer;font-family:'Inter',sans-serif}
+.btn-outline{background:transparent;color:var(--gold);padding:0.75rem 2rem;border-radius:2rem;font-weight:600;font-size:0.9rem;border:1.5px solid var(--gold);cursor:pointer;font-family:'Inter',sans-serif}
+.hero-emojis{font-size:5rem;display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
+.deals-strip{background:linear-gradient(90deg,#1a0500,#2a0800,#1a0500);padding:0.6rem 1.5rem;display:flex;align-items:center;gap:1rem;overflow-x:auto}
+.deals-strip::-webkit-scrollbar{display:none}
+.deal-chip{background:var(--red);color:#fff;font-size:0.7rem;font-weight:700;padding:0.2rem 0.6rem;border-radius:0.25rem;white-space:nowrap;flex-shrink:0}
+.deal-item{color:#fff;font-size:0.78rem;white-space:nowrap;flex-shrink:0}
+.deal-item span{color:var(--gold);font-weight:600}
+.deal-sep{color:var(--gray2);flex-shrink:0}
+.section{padding:2rem 1.5rem}
+.section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem}
+.section-title{font-size:1.2rem;font-weight:700}
+.section-title span{color:var(--gold)}
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:1rem}
+.cat-card{background:var(--bg3);border:1px solid var(--border);border-radius:1rem;padding:1.25rem 0.75rem;text-align:center;cursor:pointer;transition:all 0.2s}
+.cat-card:hover{border-color:var(--gold);background:var(--bg4);transform:translateY(-2px)}
+.cat-card svg{width:2rem;height:2rem;margin-bottom:0.5rem}
+.cat-name{font-size:0.78rem;font-weight:500;color:var(--gray)}
+.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1.25rem}
+.product-card{background:var(--bg2);border:1px solid var(--border);border-radius:1rem;overflow:hidden;transition:all 0.2s;position:relative}
+.product-card:hover{border-color:var(--gold);transform:translateY(-3px);box-shadow:0 8px 32px rgba(240,180,41,0.1)}
+.prod-badge{position:absolute;top:0.6rem;left:0.6rem;background:var(--red);color:#fff;font-size:0.65rem;font-weight:700;padding:0.2rem 0.5rem;border-radius:0.25rem;z-index:1}
+.prod-badge.new-badge{background:var(--green)}
+.prod-img{background:var(--bg3);height:170px;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:12px}
+.prod-img svg{width:130px;height:130px;transition:transform 0.3s}
+.product-card:hover .prod-img svg{transform:scale(1.07)}
+.prod-body{padding:0.875rem}
+.prod-brand{font-size:0.68rem;color:var(--gray);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.25rem}
+.prod-name{font-size:0.875rem;font-weight:600;line-height:1.35;margin-bottom:0.5rem}
+.prod-rating{display:flex;align-items:center;gap:0.4rem;margin-bottom:0.5rem}
+.prod-stars{color:var(--gold);font-size:0.75rem}
+.prod-rcount{color:var(--gray2);font-size:0.7rem}
+.prod-price{display:flex;align-items:baseline;gap:0.5rem;flex-wrap:wrap}
+.prod-price-main{font-size:1.1rem;font-weight:700}
+.prod-price-orig{font-size:0.75rem;color:var(--gray2);text-decoration:line-through}
+.prod-price-save{font-size:0.72rem;color:var(--green);font-weight:600}
+.prod-actions{display:flex;gap:0.5rem;padding:0 0.875rem 0.875rem}
+.btn-add{flex:1;background:var(--bg4);color:#fff;border:1px solid var(--border);border-radius:2rem;padding:0.5rem;font-size:0.78rem;font-weight:600;cursor:pointer;transition:all 0.2s;font-family:'Inter',sans-serif}
+.btn-add:hover{border-color:var(--gold);color:var(--gold)}
+.btn-buy-now{flex:1;background:var(--gold);color:#111;border:none;border-radius:2rem;padding:0.5rem;font-size:0.78rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif}
+.btn-buy-now:hover{background:var(--gold2)}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:500;align-items:center;justify-content:center;padding:1rem}
+.overlay.show{display:flex}
+.modal{background:var(--bg2);border:1px solid var(--border);border-radius:1.25rem;width:100%;max-width:500px;max-height:92vh;overflow-y:auto}
+.modal::-webkit-scrollbar{width:4px}
+.modal::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px}
+.modal-head{padding:1.1rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:var(--bg2);z-index:1}
+.modal-head h2{font-size:1rem;font-weight:700}
+.modal-close{background:var(--bg3);border:1px solid var(--border);color:var(--gray);width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:0.9rem;display:flex;align-items:center;justify-content:center}
+.modal-body{padding:1.25rem 1.5rem}
+.fsec{font-size:0.75rem;font-weight:600;color:var(--gold);text-transform:uppercase;letter-spacing:0.08em;margin:1.1rem 0 0.75rem}
+.fg{margin-bottom:0.875rem}
+.fg label{display:block;font-size:0.78rem;font-weight:500;color:var(--gray);margin-bottom:0.3rem}
+.fg input,.fg select,.fg textarea{width:100%;padding:0.65rem 0.875rem;background:var(--bg3);border:1px solid var(--border);border-radius:0.6rem;color:#fff;font-size:0.875rem;font-family:'Inter',sans-serif;outline:none;transition:border-color 0.2s}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--gold)}
+.fg select option{background:var(--bg3)}
+.fg textarea{resize:vertical;min-height:70px}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem}
+.osum{background:var(--bg3);border:1px solid var(--border);border-radius:0.875rem;padding:1rem;margin-bottom:1rem}
+.osum-row{display:flex;align-items:center;gap:0.875rem;margin-bottom:0.5rem}
+.osum-thumb{width:48px;height:48px;border-radius:0.5rem;background:var(--bg4);display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid var(--border);padding:4px}
+.osum-thumb svg{width:36px;height:36px}
+.osum-name{font-weight:600;flex:1;font-size:0.82rem}
+.osum-price{color:var(--gold);font-weight:700;font-size:0.875rem;white-space:nowrap}
+.osum-total{border-top:1px solid var(--border);margin-top:0.75rem;padding-top:0.75rem;display:flex;justify-content:space-between;font-size:0.875rem}
+.btn-proceed{width:100%;padding:0.875rem;background:var(--gold);color:#111;border:none;border-radius:2rem;font-size:0.9rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;margin-top:0.25rem}
 
+/* WhatsApp button */
+.btn-whatsapp{width:100%;padding:1rem;background:var(--wa);color:#fff;border:none;border-radius:2rem;font-size:1rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;display:flex;align-items:center;justify-content:center;gap:0.6rem;margin-top:0.5rem;letter-spacing:0.01em}
+.btn-whatsapp:hover{background:#1ebe5a}
+.btn-back{width:100%;padding:0.65rem;background:transparent;color:var(--gray);border:1px solid var(--border);border-radius:2rem;font-size:0.82rem;cursor:pointer;font-family:'Inter',sans-serif;margin-top:0.6rem}
+
+/* WhatsApp redirect step */
+.wa-redirect-box{background:linear-gradient(135deg,#0d2a1a,#0a1a10);border:1.5px solid #25D366;border-radius:1rem;padding:1.5rem;text-align:center;margin-bottom:1rem}
+.wa-redirect-box .wa-icon{font-size:3.5rem;margin-bottom:0.75rem}
+.wa-redirect-box h3{font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:0.5rem}
+.wa-redirect-box p{color:#a0c0a8;font-size:0.85rem;line-height:1.6;margin-bottom:0.25rem}
+.wa-notice-box{background:rgba(240,180,41,0.08);border:1px solid rgba(240,180,41,0.3);border-radius:0.875rem;padding:1rem;margin-bottom:1rem;font-size:0.82rem;color:#d4a017;line-height:1.6}
+.wa-notice-box strong{color:var(--gold)}
+
+.conf-wrap{text-align:center;padding:0.5rem 0}
+.conf-icon{font-size:3.5rem;margin-bottom:0.75rem}
+.conf-title{font-size:1.25rem;font-weight:700;color:var(--green);margin-bottom:0.4rem}
+.conf-sub{color:var(--gray);font-size:0.875rem;line-height:1.6;margin-bottom:1.25rem}
+.conf-id{background:var(--bg3);border:1px solid var(--border);border-radius:0.75rem;padding:0.875rem;margin-bottom:1rem;font-size:0.85rem}
+.conf-id span{color:var(--gold);font-weight:700;font-size:1rem}
+.conf-note{background:rgba(56,161,105,0.1);border:1px solid rgba(56,161,105,0.3);border-radius:0.75rem;padding:0.875rem;font-size:0.8rem;color:var(--green);margin-bottom:1.1rem;line-height:1.55}
+.conf-addr{background:var(--bg3);border-radius:0.875rem;padding:0.875rem;margin-bottom:1.1rem;font-size:0.82rem;color:var(--gray);text-align:left}
+.btn-continue{width:100%;padding:0.875rem;background:var(--gold);color:#111;border:none;border-radius:2rem;font-size:0.9rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif}
+.cart-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:300}
+.cart-overlay.show{display:block}
+.cart-sidebar{position:fixed;top:0;right:-420px;width:380px;height:100vh;background:var(--bg2);border-left:1px solid var(--border);z-index:400;transition:right 0.3s;display:flex;flex-direction:column}
+.cart-sidebar.open{right:0}
+.cart-head{padding:1.1rem 1.25rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.cart-head h2{font-size:1rem;font-weight:700}
+.cart-items{flex:1;overflow-y:auto;padding:1rem}
+.cart-empty{text-align:center;padding:3rem 1rem;color:var(--gray)}
+.cart-empty-icon{font-size:3rem;margin-bottom:0.75rem}
+.cart-item{display:flex;align-items:center;gap:0.75rem;padding:0.875rem 0;border-bottom:1px solid var(--border)}
+.ci-thumb{width:54px;height:54px;border-radius:0.5rem;background:var(--bg3);display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid var(--border);padding:4px}
+.ci-thumb svg{width:40px;height:40px}
+.ci-info{flex:1;min-width:0}
+.ci-name{font-size:0.82rem;font-weight:600;margin-bottom:0.2rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ci-price{font-size:0.875rem;color:var(--gold);font-weight:700}
+.ci-qty{display:flex;align-items:center;gap:0.4rem;margin-top:0.3rem}
+.qty-btn{background:var(--bg3);border:1px solid var(--border);color:#fff;width:22px;height:22px;border-radius:50%;cursor:pointer;font-size:0.9rem;display:flex;align-items:center;justify-content:center}
+.qty-val{font-size:0.82rem;min-width:20px;text-align:center}
+.ci-del{background:none;border:none;color:var(--gray2);cursor:pointer;font-size:1rem;flex-shrink:0}
+.cart-foot{padding:1.1rem;border-top:1px solid var(--border)}
+.cart-total-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.875rem}
+.cart-total-lbl{color:var(--gray);font-size:0.875rem}
+.cart-total-val{font-size:1.2rem;font-weight:700;color:var(--gold)}
+.btn-checkout{width:100%;padding:0.875rem;background:var(--gold);color:#111;border:none;border-radius:2rem;font-size:0.9rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif}
+.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(100px);background:var(--bg3);border:1px solid var(--gold);color:#fff;padding:0.75rem 1.75rem;border-radius:2rem;font-size:0.875rem;font-weight:500;z-index:1000;transition:transform 0.35s;white-space:nowrap;box-shadow:0 8px 32px rgba(0,0,0,0.5)}
+.toast.show{transform:translateX(-50%) translateY(0)}
+footer{background:#000;border-top:1px solid var(--border);padding:2.5rem 1.5rem 1.5rem}
+.footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:2rem;margin-bottom:2rem}
+.footer-col h4{font-size:0.78rem;font-weight:700;margin-bottom:0.875rem;text-transform:uppercase;letter-spacing:0.06em}
+.footer-col a{display:block;color:var(--gray);font-size:0.78rem;text-decoration:none;margin-bottom:0.4rem}
+.footer-col a:hover{color:var(--gold)}
+.footer-bottom{border-top:1px solid var(--border);padding-top:1.25rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.footer-logo{font-size:1.25rem;font-weight:700;color:var(--gold)}
+.footer-logo span{color:#fff}
+.footer-copy{color:var(--gray2);font-size:0.75rem}
+@media(max-width:768px){
+  .topbar{display:none}
+  nav{flex-wrap:wrap;gap:0.6rem}
+  .search-wrap{order:3;width:100%}
+  .hero-banner{flex-direction:column;padding:2rem 1rem;text-align:center}
+  .hero-emojis{font-size:3rem}
+  .hero-btns{justify-content:center}
+  .products-grid{grid-template-columns:repeat(2,1fr);gap:0.75rem}
+  .cart-sidebar{width:100%;right:-100%}
+  .frow{grid-template-columns:1fr}
+}
+</style>
+</head>
 <body>
 
-<header>
-<h1>TECH HUB</h1>
+<div class="topbar">
+  <span>🇮🇳 Free delivery above ₹499 · Pan India Shipping</span>
+  <span>📞 Support: <a href="https://wa.me/918481944109">8481944109</a></span>
+  <span><a href="https://wa.me/918481944109">WhatsApp Us</a></span>
+</div>
 
 <nav>
-<a href="index.html">Home</a>
-<a href="products.html">Products</a>
-<a href="cart.html">Cart</a>
-<a href="orders.html">Orders</a>
-<a href="login.html">Login</a>
+  <a class="nav-logo" href="#">Smart<span>Hub</span></a>
+  <div class="search-wrap">
+    <input type="text" id="searchInput" placeholder="Search laptops, mobiles, fridges..." oninput="applyFilter()">
+    <button onclick="applyFilter()">🔍</button>
+  </div>
+  <div class="nav-right">
+    <a class="nav-link" href="https://wa.me/918481944109" target="_blank"><small>Help</small>WhatsApp</a>
+    <button class="cart-btn" onclick="openCart()">🛒 Cart <span class="cart-badge" id="cartCount">0</span></button>
+  </div>
 </nav>
 
-</header>
+<div class="nav-cats">
+  <span class="nav-cat active" onclick="filterCat('all',this)">All</span>
+  <span class="nav-cat" onclick="filterCat('mobile',this)">📱 Mobiles</span>
+  <span class="nav-cat" onclick="filterCat('laptop',this)">💻 Laptops</span>
+  <span class="nav-cat" onclick="filterCat('appliance',this)">🏠 Appliances</span>
+  <span class="nav-cat" onclick="filterCat('gadget',this)">⚡ Gadgets</span>
+  <span class="nav-cat" onclick="filterCat('audio',this)">🎧 Audio</span>
+  <span class="nav-cat" onclick="filterCat('tv',this)">📺 TVs</span>
+</div>
 
-<section class="hero">
+<div class="hero-banner">
+  <div class="hero-text">
+    <h1>India's Premium<br><span>Tech Store</span> 🇮🇳</h1>
+    <p>Top brands · Best prices · Delivered to your door. Order via WhatsApp — fast &amp; easy.</p>
+    <div class="hero-btns">
+      <button class="btn-gold" onclick="document.getElementById('prods').scrollIntoView({behavior:'smooth'})">Shop Now</button>
+      <button class="btn-outline" onclick="openCart()">View Cart</button>
+    </div>
+  </div>
+  <div class="hero-emojis">💻 📱 🧊 📺 🎧 ⚡</div>
+</div>
 
-<h2>Welcome to Tech Hub Store</h2>
-<p>Best tech products online</p>
+<div class="deals-strip">
+  <span class="deal-chip">🔥 TODAY'S DEALS</span>
+  <span class="deal-item">iPhone 15 — <span>₹71,999</span> (Save ₹8,000)</span>
+  <span class="deal-sep">·</span>
+  <span class="deal-item">Samsung Fridge — <span>₹34,990</span> (32% off)</span>
+  <span class="deal-sep">·</span>
+  <span class="deal-item">MacBook Air M3 — <span>₹99,990</span> (₹15,000 off)</span>
+  <span class="deal-sep">·</span>
+  <span class="deal-item">Sony Headphones — <span>₹18,999</span> (40% off)</span>
+</div>
 
-<a href="products.html" class="btn">Shop Now</a>
+<div class="section">
+  <div class="section-head"><div class="section-title">Shop by <span>Category</span></div></div>
+  <div class="cat-grid">
+    <div class="cat-card" onclick="filterCat('mobile',null)">
+      <svg viewBox="0 0 40 40" fill="none"><rect x="8" y="2" width="24" height="36" rx="4" fill="#2a2a2a" stroke="#f0b429" stroke-width="1.5"/><rect x="11" y="6" width="18" height="24" rx="1" fill="#1a3a5c"/><circle cx="20" cy="35" r="1.5" fill="#f0b429"/><rect x="16" y="3.5" width="8" height="1.5" rx="0.75" fill="#f0b429"/></svg>
+      <div class="cat-name">Mobiles</div>
+    </div>
+    <div class="cat-card" onclick="filterCat('laptop',null)">
+      <svg viewBox="0 0 40 40" fill="none"><rect x="4" y="8" width="32" height="20" rx="2" fill="#2a2a2a" stroke="#f0b429" stroke-width="1.5"/><rect x="7" y="11" width="26" height="14" rx="1" fill="#1a3a5c"/><rect x="2" y="28" width="36" height="3" rx="1.5" fill="#2a2a2a" stroke="#f0b429" stroke-width="1"/><rect x="14" y="28.5" width="12" height="1.5" rx="0.75" fill="#f0b429"/></svg>
+      <div class="cat-name">Laptops</div>
+    </div>
+    <div class="cat-card" onclick="filterCat('appliance',null)">
+      <svg viewBox="0 0 40 40" fill="none"><rect x="8" y="3" width="24" height="35" rx="3" fill="#2a2a2a" stroke="#f0b429" stroke-width="1.5"/><line x1="8" y1="16" x2="32" y2="16" stroke="#f0b429" stroke-width="1"/><circle cx="28" cy="9" r="1.5" fill="#f0b429"/><circle cx="28" cy="23" r="1.5" fill="#60a5fa"/><rect x="11" y="7" width="12" height="6" rx="1" fill="#1a3a5c"/></svg>
+      <div class="cat-name">Fridges</div>
+    </div>
+    <div class="cat-card" onclick="filterCat('appliance',null)">
+      <svg viewBox="0 0 40 40" fill="none"><rect x="4" y="8" width="32" height="16" rx="3" fill="#2a2a2a" stroke="#f0b429" stroke-width="1.5"/><rect x="7" y="11" width="26" height="10" rx="1" fill="#1a3a5c"/><rect x="10" y="24" width="4" height="10" rx="1" fill="#2a2a2a" stroke="#f0b429" stroke-width="1"/><rect x="26" y="24" width="4" height="10" rx="1" fill="#2a2a2a" stroke="#f0b429" stroke-width="1"/><path d="M14 16 Q20 12 26 16" stroke="#60a5fa" stroke-width="1.5" fill="none"/></svg>
+      <div class="cat-name">ACs</div>
+    </div>
+    <div class="cat-card" onclick="filterCat('appliance',null)">
+      <svg viewBox="0 0 40 40" fill="none"><rect x="6" y="5" width="28" height="30" rx="14" fill="#2a2a2a" stroke="#f0b429" stroke-width="1.5"/><circle cx="20" cy="20" r="8" fill="#1a3a5c" stroke="#f0b429" stroke-width="1"/><circle cx="20" cy="20" r="3" fill="#f0b429"/></svg>
+      <div class="cat-name">Washing</div>
+    </div>
+    <div class="cat-card" onclick="filterCat('tv',null)">
+      <svg viewBox="0 0 40 40" fill="none"><rect x="3" y="6" width="34" height="22" rx="2" fill="#2a2a2a" stroke="#f0b429" stroke-width="1.5"/><rect x="6" y="9" width="28" height="16" rx="1" fill="#1a3a5c"/><rect x="14" y="28" width="12" height="3" rx="1" fill="#2a2a2a" stroke="#f0b429" stroke-width="1"/><rect x="10" y="31" width="20" height="2" rx="1" fill="#2a2a2a" stroke="#f0b429" stroke-width="0.8"/></svg>
+      <div class="cat-name">Smart TVs</div>
+    </div>
+    <div class="cat-card" onclick="filterCat('audio',null)">
+      <svg viewBox="0 0 40 40" fill="none"><path d="M8 20 C8 11 13 6 20 6 C27 6 32 11 32 20" stroke="#f0b429" stroke-width="2" fill="none"/><rect x="5" y="19" width="6" height="10" rx="3" fill="#2a2a2a" stroke="#f0b429" stroke-width="1.5"/><rect x="29" y="19" width="6" height="10" rx="3" fill="#2a2a2a" stroke="#f0b429" stroke-width="1.5"/></svg>
+      <div class="cat-name">Audio</div>
+    </div>
+    <div class="cat-card" onclick="filterCat('gadget',null)">
+      <svg viewBox="0 0 40 40" fill="none"><polygon points="20,4 24,16 37,16 27,24 31,36 20,28 9,36 13,24 3,16 16,16" fill="#2a2a2a" stroke="#f0b429" stroke-width="1.5"/><polygon points="20,10 22.5,18 31,18 24,23 26.5,31 20,26 13.5,31 16,23 9,18 17.5,18" fill="#f0b429" opacity="0.4"/></svg>
+      <div class="cat-name">Gadgets</div>
+    </div>
+  </div>
+</div>
 
-</section>
+<div class="section" id="prods">
+  <div class="section-head">
+    <div class="section-title">All <span>Products</span></div>
+    <span style="color:var(--gray);font-size:0.8rem" id="prodCount"></span>
+  </div>
+  <div class="products-grid" id="prodGrid"></div>
+</div>
 
+<footer>
+  <div class="footer-grid">
+    <div class="footer-col"><h4>SmartHub</h4><a href="#">About Us</a><a href="#">Blog</a></div>
+    <div class="footer-col"><h4>Customer</h4><a href="https://wa.me/918481944109">Track Order</a><a href="https://wa.me/918481944109">WhatsApp Help</a></div>
+    <div class="footer-col"><h4>Categories</h4><a href="#">Mobiles</a><a href="#">Laptops</a></div>
+    <div class="footer-col"><h4>Contact</h4><a href="https://wa.me/918481944109">📱 8481944109</a></div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-logo">Smart<span>Hub</span></div>
+    <div class="footer-copy">© 2026 SmartHub India. All rights reserved.</div>
+  </div>
+</footer>
+
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-head"><h2>🛒 Your Cart</h2><button class="modal-close" onclick="closeCart()">✕</button></div>
+  <div class="cart-items" id="cartItems"><div class="cart-empty"><div class="cart-empty-icon">🛒</div><p>Cart is empty</p></div></div>
+  <div class="cart-foot" id="cartFoot" style="display:none">
+    <div class="cart-total-row"><span class="cart-total-lbl">Total</span><span class="cart-total-val" id="cartTotal">₹0</span></div>
+    <button class="btn-checkout" onclick="closeCart();startOrder(null)">Proceed to Buy</button>
+  </div>
+</div>
+
+<div class="overlay" id="orderOverlay">
+  <div class="modal">
+    <div class="modal-head"><h2 id="modalTitle">📦 Place Order</h2><button class="modal-close" onclick="closeModal()">✕</button></div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const OWNER_PHONE = '918481944109';
+
+const SVGS = {
+  iphone: `<svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="25" y="5" width="70" height="110" rx="12" fill="#1a1a2e" stroke="#555" stroke-width="2"/>
+    <rect x="30" y="14" width="60" height="88" rx="4" fill="#0f3460"/>
+    <rect x="45" y="7" width="30" height="5" rx="2.5" fill="#333"/>
+    <circle cx="60" cy="109" r="4" fill="#333"/>
+    <rect x="33" y="17" width="54" height="82" rx="2" fill="#16213e"/>
+    <rect x="36" y="25" width="48" height="35" rx="2" fill="#0a2040"/>
+    <circle cx="60" cy="42" r="10" fill="#1a3a6c" stroke="#4a9eff" stroke-width="1.5"/>
+    <circle cx="60" cy="42" r="4" fill="#4a9eff"/>
+    <rect x="36" y="65" width="20" height="14" rx="2" fill="#1a3a6c"/>
+    <rect x="60" y="65" width="24" height="14" rx="2" fill="#1a3a6c"/>
+    <rect x="36" y="83" width="48" height="8" rx="2" fill="#1a3a6c"/>
+    <rect x="25" y="30" width="4" height="12" rx="2" fill="#333"/>
+    <rect x="25" y="46" width="4" height="8" rx="2" fill="#333"/>
+    <rect x="91" y="35" width="4" height="14" rx="2" fill="#333"/>
+  </svg>`,
+  android: `<svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="22" y="4" width="76" height="112" rx="10" fill="#1a1a2e" stroke="#555" stroke-width="2"/>
+    <rect x="28" y="14" width="64" height="90" rx="3" fill="#0d1b2a"/>
+    <rect x="44" y="6" width="32" height="5" rx="2.5" fill="#333"/>
+    <rect x="56" y="108" width="8" height="3" rx="1.5" fill="#333"/>
+    <rect x="31" y="17" width="58" height="84" rx="2" fill="#0a1628"/>
+    <circle cx="60" cy="45" r="18" fill="#1a3050" stroke="#2a82c0" stroke-width="1.5"/>
+    <path d="M52 45 L60 38 L68 45 L68 55 L52 55 Z" fill="#2a82c0" opacity="0.6"/>
+    <circle cx="60" cy="47" r="5" fill="#2a82c0"/>
+    <rect x="31" y="74" width="26" height="16" rx="2" fill="#1a3050"/>
+    <rect x="63" y="74" width="26" height="16" rx="2" fill="#1a3050"/>
+    <rect x="22" y="32" width="4" height="10" rx="2" fill="#333"/>
+    <rect x="22" y="46" width="4" height="7" rx="2" fill="#333"/>
+    <rect x="94" y="36" width="4" height="14" rx="2" fill="#333"/>
+  </svg>`,
+  macbook: `<svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="10" y="18" width="100" height="66" rx="4" fill="#2a2a2a" stroke="#555" stroke-width="1.5"/>
+    <rect x="15" y="23" width="90" height="56" rx="2" fill="#0d1b35"/>
+    <rect x="18" y="26" width="84" height="50" rx="1" fill="#081525"/>
+    <circle cx="60" cy="51" r="14" fill="#1a3a6c" stroke="#4a9eff" stroke-width="1.5"/>
+    <path d="M54 51 L58 47 L66 51 L62 55 Z" fill="#4a9eff"/>
+    <rect x="5" y="84" width="110" height="6" rx="2" fill="#2a2a2a" stroke="#555" stroke-width="1"/>
+    <rect x="42" y="84.5" width="36" height="4" rx="2" fill="#3a3a3a"/>
+    <rect x="18" y="34" width="30" height="20" rx="1" fill="#0f2540"/>
+    <rect x="52" y="34" width="50" height="9" rx="1" fill="#0f2540"/>
+    <rect x="52" y="46" width="50" height="9" rx="1" fill="#0f2540"/>
+    <rect x="18" y="58" width="84" height="4" rx="1" fill="#0f2540"/>
+    <rect x="18" y="65" width="60" height="4" rx="1" fill="#0f2540"/>
+  </svg>`,
+  laptop: `<svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="8" y="15" width="104" height="70" rx="4" fill="#1e1e1e" stroke="#666" stroke-width="1.5"/>
+    <rect x="13" y="20" width="94" height="60" rx="2" fill="#0a1628"/>
+    <rect x="16" y="23" width="88" height="54" rx="1" fill="#060f1e"/>
+    <rect x="20" y="27" width="40" height="28" rx="1" fill="#0d2040"/>
+    <rect x="64" y="27" width="36" height="13" rx="1" fill="#0d2040"/>
+    <rect x="64" y="43" width="36" height="12" rx="1" fill="#0d2040"/>
+    <rect x="20" y="58" width="80" height="7" rx="1" fill="#0d2040"/>
+    <rect x="3" y="85" width="114" height="8" rx="3" fill="#1e1e1e" stroke="#666" stroke-width="1"/>
+    <rect x="38" y="85.5" width="44" height="6" rx="2" fill="#2a2a2a"/>
+    <circle cx="60" cy="16" r="2" fill="#555"/>
+  </svg>`,
+  fridge: `<svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="25" y="5" width="70" height="110" rx="6" fill="#2a2a2a" stroke="#555" stroke-width="1.5"/>
+    <line x1="25" y1="48" x2="95" y2="48" stroke="#555" stroke-width="2"/>
+    <rect x="28" y="8" width="64" height="37" rx="3" fill="#1a1a1a"/>
+    <rect x="28" y="51" width="64" height="61" rx="3" fill="#1a1a1a"/>
+    <rect x="80" y="20" width="5" height="18" rx="2.5" fill="#555"/>
+    <rect x="80" y="65" width="5" height="25" rx="2.5" fill="#555"/>
+    <rect x="32" y="58" width="38" height="4" rx="1" fill="#333"/>
+    <rect x="32" y="65" width="30" height="4" rx="1" fill="#333"/>
+    <rect x="32" y="72" width="38" height="4" rx="1" fill="#333"/>
+    <circle cx="38" cy="44" r="3" fill="#60a5fa"/>
+  </svg>`,
+  ac: `<svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="8" y="25" width="104" height="46" rx="6" fill="#2a2a2a" stroke="#555" stroke-width="1.5"/>
+    <rect x="12" y="30" width="96" height="36" rx="3" fill="#1a1a1a"/>
+    <rect x="15" y="33" width="90" height="16" rx="2" fill="#0d1b35"/>
+    <path d="M18 38 Q30 34 42 38 Q54 42 66 38 Q78 34 90 38 Q102 42 105 40" stroke="#4a9eff" stroke-width="1.5" fill="none" stroke-dasharray="3 2"/>
+    <path d="M18 43 Q30 39 42 43 Q54 47 66 43 Q78 39 90 43 Q102 47 105 45" stroke="#4a9eff" stroke-width="1" fill="none" stroke-dasharray="3 2" opacity="0.6"/>
+    <rect x="15" y="52" width="90" height="10" rx="1" fill="#151515"/>
+    <rect x="18" y="54" width="12" height="6" rx="1" fill="#1a3a5c"/>
+    <rect x="34" y="54" width="12" height="6" rx="1" fill="#1a3a5c"/>
+    <circle cx="100" cy="57" r="3" fill="#f0b429"/>
+    <rect x="42" y="71" width="8" height="18" rx="2" fill="#2a2a2a" stroke="#555" stroke-width="1"/>
+    <rect x="70" y="71" width="8" height="18" rx="2" fill="#2a2a2a" stroke="#555" stroke-width="1"/>
+  </svg>`,
+  washer: `<svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="15" y="8" width="90" height="108" rx="6" fill="#2a2a2a" stroke="#555" stroke-width="1.5"/>
+    <rect x="19" y="12" width="82" height="22" rx="3" fill="#1a1a1a"/>
+    <circle cx="75" cy="23" r="5" fill="#1a3a5c" stroke="#4a9eff" stroke-width="1"/>
+    <circle cx="90" cy="23" r="5" fill="#1a3a5c" stroke="#4a9eff" stroke-width="1"/>
+    <circle cx="60" cy="72" r="30" fill="#1a1a1a" stroke="#555" stroke-width="2"/>
+    <circle cx="60" cy="72" r="24" fill="#0d1b35" stroke="#1a4a6a" stroke-width="1.5"/>
+    <circle cx="60" cy="72" r="10" fill="#1a1a1a" stroke="#4a9eff" stroke-width="1"/>
+    <path d="M44 62 Q52 55 60 58 Q68 61 72 56" stroke="#4a9eff" stroke-width="1.5" fill="none"/>
+  </svg>`,
+  tv: `<svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="5" y="15" width="110" height="68" rx="4" fill="#1a1a1a" stroke="#555" stroke-width="2"/>
+    <rect x="10" y="20" width="100" height="58" rx="2" fill="#0d1b35"/>
+    <rect x="15" y="25" width="90" height="48" rx="1" fill="#080f20"/>
+    <rect x="18" y="28" width="40" height="42" rx="1" fill="#0a1828"/>
+    <circle cx="38" cy="49" r="12" fill="#1a2a40" stroke="#2a6aaa" stroke-width="1"/>
+    <polygon points="34,44 34,54 46,49" fill="#2a6aaa"/>
+    <rect x="62" y="28" width="42" height="6" rx="1" fill="#1a2840"/>
+    <rect x="62" y="37" width="42" height="6" rx="1" fill="#1a2840"/>
+    <rect x="62" y="46" width="42" height="6" rx="1" fill="#1a2840"/>
+    <rect x="40" y="83" width="40" height="7" rx="2" fill="#1a1a1a" stroke="#555" stroke-width="1"/>
+    <rect x="30" y="90" width="60" height="4" rx="2" fill="#1a1a1a" stroke="#555" stroke-width="1"/>
+    <circle cx="107" cy="20" r="2.5" fill="#f0b429"/>
+  </svg>`,
+  headphones: `<svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M20 60 C20 35 38 18 60 18 C82 18 100 35 100 60" stroke="#555" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <rect x="10" y="55" width="20" height="34" rx="10" fill="#1a1a1a" stroke="#888" stroke-width="1.5"/>
+    <rect x="90" y="55" width="20" height="34" rx="10" fill="#1a1a1a" stroke="#888" stroke-width="1.5"/>
+    <rect x="14" y="62" width="12" height="20" rx="6" fill="#2a2a2a"/>
+    <rect x="94" y="62" width="12" height="20" rx="6" fill="#2a2a2a"/>
+    <circle cx="20" cy="72" r="4" fill="#f0b429" opacity="0.5"/>
+    <circle cx="100" cy="72" r="4" fill="#f0b429" opacity="0.5"/>
+  </svg>`,
+  speaker: `<svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="20" y="25" width="80" height="70" rx="12" fill="#1a1a1a" stroke="#555" stroke-width="2"/>
+    <circle cx="60" cy="62" r="24" fill="#111" stroke="#444" stroke-width="1.5"/>
+    <circle cx="60" cy="62" r="18" fill="#0a0a0a" stroke="#333" stroke-width="1"/>
+    <circle cx="60" cy="62" r="10" fill="#1a1a1a" stroke="#555" stroke-width="1.5"/>
+    <circle cx="60" cy="62" r="4" fill="#555"/>
+    <rect x="26" y="32" width="10" height="6" rx="3" fill="#f0b429"/>
+  </svg>`,
+  earbuds: `<svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="15" y="20" width="90" height="80" rx="12" fill="#1a1a1a" stroke="#555" stroke-width="1.5"/>
+    <line x1="60" y1="20" x2="60" y2="100" stroke="#333" stroke-width="1.5"/>
+    <ellipse cx="35" cy="55" rx="14" ry="22" fill="#2a2a2a" stroke="#666" stroke-width="1.5"/>
+    <ellipse cx="35" cy="55" rx="8" ry="13" fill="#111"/>
+    <circle cx="35" cy="55" r="1.5" fill="#f0b429"/>
+    <ellipse cx="85" cy="65" rx="14" ry="22" fill="#2a2a2a" stroke="#666" stroke-width="1.5"/>
+    <ellipse cx="85" cy="65" rx="8" ry="13" fill="#111"/>
+    <circle cx="85" cy="65" r="1.5" fill="#f0b429"/>
+    <circle cx="60" cy="95" r="2" fill="#f0b429"/>
+  </svg>`,
+  hub: `<svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="15" y="40" width="90" height="40" rx="8" fill="#1a1a1a" stroke="#555" stroke-width="1.5"/>
+    <rect x="20" y="46" width="80" height="28" rx="4" fill="#111"/>
+    <rect x="24" y="52" width="12" height="8" rx="2" fill="#333" stroke="#555" stroke-width="1"/>
+    <rect x="40" y="52" width="12" height="8" rx="2" fill="#333" stroke="#555" stroke-width="1"/>
+    <rect x="56" y="52" width="12" height="8" rx="2" fill="#1a3a5c" stroke="#4a9eff" stroke-width="1"/>
+    <rect x="72" y="52" width="12" height="8" rx="2" fill="#1a3a5c" stroke="#4a9eff" stroke-width="1"/>
+    <circle cx="26" cy="64" r="2" fill="#f0b429"/>
+    <circle cx="42" cy="64" r="2" fill="#f0b429"/>
+    <circle cx="58" cy="64" r="2" fill="#4a9eff"/>
+    <circle cx="74" cy="64" r="2" fill="#4a9eff"/>
+  </svg>`,
+  charger: `<svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="30" y="20" width="60" height="60" rx="12" fill="#1a1a1a" stroke="#555" stroke-width="2"/>
+    <rect x="38" y="30" width="44" height="40" rx="6" fill="#111"/>
+    <path d="M52 45 L60 35 L60 50 L68 50 L60 62 L60 47 Z" fill="#f0b429"/>
+    <rect x="46" y="80" width="10" height="18" rx="3" fill="#2a2a2a" stroke="#555" stroke-width="1"/>
+    <rect x="64" y="80" width="10" height="18" rx="3" fill="#2a2a2a" stroke="#555" stroke-width="1"/>
+  </svg>`,
+  powerbank: `<svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="20" y="30" width="80" height="60" rx="10" fill="#1a1a1a" stroke="#555" stroke-width="2"/>
+    <rect x="25" y="35" width="70" height="50" rx="6" fill="#111"/>
+    <rect x="28" y="47" width="44" height="16" rx="3" fill="#1a3a5c" stroke="#2a6aff" stroke-width="0.5"/>
+    <rect x="28" y="47" width="32" height="16" rx="3" fill="#1a4a7c"/>
+    <circle cx="36" cy="73" r="4" fill="#f0b429" opacity="0.8"/>
+    <circle cx="50" cy="73" r="4" fill="#f0b429" opacity="0.5"/>
+    <circle cx="64" cy="73" r="4" fill="#333"/>
+    <path d="M55 40 L60 33 L60 42 L65 42 L60 49 L60 40 Z" fill="#f0b429" opacity="0.7"/>
+  </svg>`,
+};
+
+const products = [
+  {id:1,  name:'iPhone 15 128GB',       brand:'Apple',      cat:'mobile',    svgKey:'iphone',     price:71999,  orig:79999,  rating:4.8, reviews:3241,  badge:'DEAL'},
+  {id:2,  name:'Samsung Galaxy S24',    brand:'Samsung',    cat:'mobile',    svgKey:'android',    price:64999,  orig:74999,  rating:4.7, reviews:2187,  badge:'HOT'},
+  {id:3,  name:'OnePlus 12 256GB',      brand:'OnePlus',    cat:'mobile',    svgKey:'android',    price:54999,  orig:61999,  rating:4.6, reviews:1843,  badge:''},
+  {id:4,  name:'Redmi Note 13 Pro',     brand:'Xiaomi',     cat:'mobile',    svgKey:'android',    price:24999,  orig:29999,  rating:4.5, reviews:5621,  badge:'BEST'},
+  {id:5,  name:'MacBook Air M3',        brand:'Apple',      cat:'laptop',    svgKey:'macbook',    price:99990,  orig:114900, rating:4.9, reviews:1521,  badge:'DEAL'},
+  {id:6,  name:'Dell XPS 15',           brand:'Dell',       cat:'laptop',    svgKey:'laptop',     price:119990, orig:139990, rating:4.7, reviews:876,   badge:''},
+  {id:7,  name:'HP Pavilion 15',        brand:'HP',         cat:'laptop',    svgKey:'laptop',     price:54999,  orig:64999,  rating:4.5, reviews:2341,  badge:'HOT'},
+  {id:8,  name:'Lenovo IdeaPad 5',      brand:'Lenovo',     cat:'laptop',    svgKey:'laptop',     price:47999,  orig:55999,  rating:4.4, reviews:1987,  badge:''},
+  {id:9,  name:'Samsung 253L Fridge',   brand:'Samsung',    cat:'appliance', svgKey:'fridge',     price:34990,  orig:51490,  rating:4.6, reviews:987,   badge:'32% OFF'},
+  {id:10, name:'LG 5 Star 1.5T AC',    brand:'LG',         cat:'appliance', svgKey:'ac',         price:34999,  orig:44999,  rating:4.7, reviews:1432,  badge:'HOT'},
+  {id:11, name:'Whirlpool 7kg Washer',  brand:'Whirlpool',  cat:'appliance', svgKey:'washer',     price:22999,  orig:29999,  rating:4.4, reviews:1234,  badge:''},
+  {id:12, name:'Haier 320L Fridge',    brand:'Haier',      cat:'appliance', svgKey:'fridge',     price:29499,  orig:39999,  rating:4.3, reviews:765,   badge:'DEAL'},
+  {id:13, name:'Sony 55" 4K Smart TV', brand:'Sony',       cat:'tv',        svgKey:'tv',         price:69990,  orig:89990,  rating:4.8, reviews:2100,  badge:'22% OFF'},
+  {id:14, name:'LG 43" WebOS TV',      brand:'LG',         cat:'tv',        svgKey:'tv',         price:34999,  orig:44999,  rating:4.5, reviews:1654,  badge:''},
+  {id:15, name:'Sony WH-1000XM5',      brand:'Sony',       cat:'audio',     svgKey:'headphones', price:18999,  orig:31990,  rating:4.9, reviews:4321,  badge:'40% OFF'},
+  {id:16, name:'JBL Flip 6 Speaker',   brand:'JBL',        cat:'audio',     svgKey:'speaker',    price:8999,   orig:12999,  rating:4.7, reviews:3210,  badge:'HOT'},
+  {id:17, name:'Tech Hub Pro Series',  brand:'SmartHub',   cat:'gadget',    svgKey:'hub',        price:8999,   orig:12499,  rating:4.8, reviews:2847,  badge:'28% OFF'},
+  {id:18, name:'boAt Airdopes 141',    brand:'boAt',       cat:'audio',     svgKey:'earbuds',    price:1299,   orig:3990,   rating:4.3, reviews:87432, badge:'NEW'},
+  {id:19, name:'Mi 65W Fast Charger',  brand:'Xiaomi',     cat:'gadget',    svgKey:'charger',    price:1299,   orig:1999,   rating:4.5, reviews:12543, badge:''},
+  {id:20, name:'Portronics Power Bank',brand:'Portronics', cat:'gadget',    svgKey:'powerbank',  price:1899,   orig:2999,   rating:4.4, reviews:8765,  badge:'NEW'},
+];
+
+let cart = [], activeCat = 'all', currentBuyProduct = null;
+
+function getSVG(key) { return SVGS[key] || SVGS.hub; }
+
+function renderProducts(list) {
+  const g = document.getElementById('prodGrid');
+  document.getElementById('prodCount').textContent = list.length + ' products';
+  g.innerHTML = list.map(p => {
+    const save = Math.round((1 - p.price / p.orig) * 100);
+    const bHtml = p.badge ? `<div class="prod-badge${p.badge==='NEW'?' new-badge':''}">${p.badge}</div>` : '';
+    return `<div class="product-card">
+      ${bHtml}
+      <div class="prod-img">${getSVG(p.svgKey)}</div>
+      <div class="prod-body">
+        <div class="prod-brand">${p.brand}</div>
+        <div class="prod-name">${p.name}</div>
+        <div class="prod-rating">
+          <span class="prod-stars">${'★'.repeat(Math.floor(p.rating))}${'☆'.repeat(5-Math.floor(p.rating))}</span>
+          <span class="prod-rcount">(${p.reviews.toLocaleString()})</span>
+        </div>
+        <div class="prod-price">
+          <span class="prod-price-main">₹${p.price.toLocaleString()}</span>
+          <span class="prod-price-orig">₹${p.orig.toLocaleString()}</span>
+          <span class="prod-price-save">${save}% off</span>
+        </div>
+      </div>
+      <div class="prod-actions">
+        <button class="btn-add" onclick="addToCart(${p.id})">+ Cart</button>
+        <button class="btn-buy-now" onclick="startOrder(${p.id})">Buy Now</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function filterCat(cat, el) {
+  activeCat = cat;
+  document.querySelectorAll('.nav-cat').forEach(e => e.classList.remove('active'));
+  if (el) el.classList.add('active');
+  applyFilter();
+}
+function applyFilter() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  let list = activeCat === 'all' ? products : products.filter(p => p.cat === activeCat);
+  if (q) list = list.filter(p => p.name.toLowerCase().includes(q) || p.brand.toLowerCase().includes(q));
+  renderProducts(list);
+}
+
+function addToCart(id) {
+  const p = products.find(x => x.id === id);
+  const ex = cart.find(x => x.id === id);
+  if (ex) ex.qty++; else cart.push({...p, qty:1});
+  updateCartUI();
+  showToast('🛒 ' + p.name + ' added!');
+}
+function removeFromCart(id) { cart = cart.filter(x => x.id !== id); updateCartUI(); }
+function changeQty(id, d) {
+  const item = cart.find(x => x.id === id);
+  if (!item) return;
+  item.qty += d;
+  if (item.qty <= 0) removeFromCart(id); else updateCartUI();
+}
+
+function updateCartUI() {
+  const total = cart.reduce((s,x) => s + x.price * x.qty, 0);
+  const count = cart.reduce((s,x) => s + x.qty, 0);
+  document.getElementById('cartCount').textContent = count;
+  const el = document.getElementById('cartItems'), ft = document.getElementById('cartFoot');
+  if (!cart.length) {
+    el.innerHTML = '<div class="cart-empty"><div class="cart-empty-icon">🛒</div><p>Cart is empty</p></div>';
+    ft.style.display = 'none';
+  } else {
+    el.innerHTML = cart.map(item => `
+      <div class="cart-item">
+        <div class="ci-thumb">${getSVG(item.svgKey)}</div>
+        <div class="ci-info">
+          <div class="ci-name">${item.name}</div>
+          <div class="ci-price">₹${(item.price*item.qty).toLocaleString()}</div>
+          <div class="ci-qty">
+            <button class="qty-btn" onclick="changeQty(${item.id},-1)">−</button>
+            <span class="qty-val">${item.qty}</span>
+            <button class="qty-btn" onclick="changeQty(${item.id},1)">+</button>
+          </div>
+        </div>
+        <button class="ci-del" onclick="removeFromCart(${item.id})">🗑️</button>
+      </div>`).join('');
+    document.getElementById('cartTotal').textContent = '₹' + total.toLocaleString();
+    ft.style.display = 'block';
+  }
+}
+
+function openCart()  { document.getElementById('cartSidebar').classList.add('open'); document.getElementById('cartOverlay').classList.add('show'); }
+function closeCart() { document.getElementById('cartSidebar').classList.remove('open'); document.getElementById('cartOverlay').classList.remove('show'); }
+function startOrder(pid) { currentBuyProduct = pid ? products.find(x=>x.id===pid) : null; showFormStep(); document.getElementById('orderOverlay').classList.add('show'); }
+function closeModal() { document.getElementById('orderOverlay').classList.remove('show'); currentBuyProduct = null; }
+function getOrderItems() { return currentBuyProduct ? [{...currentBuyProduct, qty:1}] : cart; }
+function getOrderTotal() { return getOrderItems().reduce((s,x) => s + x.price*(x.qty||1), 0); }
+
+function showFormStep() {
+  document.getElementById('modalTitle').textContent = '📦 Delivery Details';
+  const items = getOrderItems(), total = getOrderTotal();
+  const states = ['Andhra Pradesh','Assam','Bihar','Delhi','Gujarat','Haryana','Jharkhand','Karnataka','Kerala','Madhya Pradesh','Maharashtra','Odisha','Punjab','Rajasthan','Tamil Nadu','Telangana','Uttar Pradesh','West Bengal'];
+
+  document.getElementById('modalBody').innerHTML = `
+
+    <!-- WhatsApp Notice Banner -->
+    <div class="wa-notice-box">
+      💬 <strong>To buy any product or get product information, contact us on WhatsApp.</strong><br>
+      Fill in your details below and we will send your order directly to WhatsApp — fast &amp; easy!
+    </div>
+
+    <div class="osum">
+      ${items.map(p=>`
+        <div class="osum-row">
+          <div class="osum-thumb">${getSVG(p.svgKey)}</div>
+          <span class="osum-name">${p.name}${p.qty>1?' ×'+p.qty:''}</span>
+          <span class="osum-price">₹${(p.price*(p.qty||1)).toLocaleString()}</span>
+        </div>`).join('')}
+      ${items.length>1?`<div class="osum-total"><span style="color:var(--gray)">Total</span><span style="color:var(--gold);font-weight:700">₹${total.toLocaleString()}</span></div>`:''}
+    </div>
+
+    <div class="fsec">📍 Delivery Address</div>
+    <div class="fg"><label>Full Name *</label><input id="fn" placeholder="Rahul Sharma"></div>
+    <div class="frow">
+      <div class="fg"><label>Mobile *</label><input id="fp" type="tel" placeholder="9876543210"></div>
+      <div class="fg"><label>Pincode *</label><input id="fpin" placeholder="400001"></div>
+    </div>
+    <div class="fg"><label>Address *</label><input id="fa" placeholder="Flat 4B, MG Road"></div>
+    <div class="frow">
+      <div class="fg"><label>City *</label><input id="fc" placeholder="Mumbai"></div>
+      <div class="fg"><label>State *</label>
+        <select id="fs"><option value="">Select State</option>
+          ${states.map(s=>`<option>${s}</option>`).join('')}
+        </select>
+      </div>
+    </div>
+    <div class="fsec">📝 Note</div>
+    <div class="fg"><label>Instructions (optional)</label><textarea id="fnote" placeholder="Any delivery instructions..."></textarea></div>
+    <button class="btn-proceed" onclick="goToWhatsApp()">Continue to WhatsApp →</button>`;
+}
+
+function goToWhatsApp() {
+  const name=document.getElementById('fn').value.trim(),
+        phone=document.getElementById('fp').value.trim(),
+        pin=document.getElementById('fpin').value.trim(),
+        addr=document.getElementById('fa').value.trim(),
+        city=document.getElementById('fc').value.trim(),
+        state=document.getElementById('fs').value,
+        note=document.getElementById('fnote').value.trim();
+
+  if (!name||!phone||!addr||!city||!state||!pin) { showToast('⚠️ Fill all required fields!'); return; }
+  if (phone.length<10) { showToast('⚠️ Enter valid mobile number!'); return; }
+
+  const items = getOrderItems(), total = getOrderTotal();
+  const orderId = 'SH' + Date.now().toString().slice(-8);
+
+  // Store for confirmation screen
+  window._od = {name,phone,pin,addr,city,state,note,items,total,orderId};
+
+  // Build WhatsApp message
+  const itemList = items.map(p=>`• ${p.name}${p.qty>1?' ×'+p.qty:''} — ₹${(p.price*(p.qty||1)).toLocaleString()}`).join('\n');
+  const waMsg = encodeURIComponent(
+`🛒 *NEW ORDER — SmartHub*
+━━━━━━━━━━━━━━━━━
+🧾 Order ID: *${orderId}*
+💰 Total: *₹${total.toLocaleString()}*
+
+📦 *Items:*
+${itemList}
+
+👤 *Customer Details:*
+Name: ${name}
+Phone: ${phone}
+
+📍 *Delivery Address:*
+${addr}, ${city}, ${state} — ${pin}
+
+📝 Note: ${note||'None'}
+━━━━━━━━━━━━━━━━━
+Please confirm this order and let me know the payment details. Thank you!`
+  );
+
+  // Open WhatsApp
+  window.open(`https://wa.me/${OWNER_PHONE}?text=${waMsg}`, '_blank');
+
+  // Show confirmation screen
+  showConfirmStep();
+}
+
+function showConfirmStep() {
+  const d = window._od;
+  document.getElementById('modalTitle').textContent = '✅ Order Sent!';
+  document.getElementById('modalBody').innerHTML = `
+    <div class="conf-wrap">
+      <div class="conf-icon">🎉</div>
+      <div class="conf-title">Order Placed on WhatsApp!</div>
+      <div class="conf-sub">Thank you <strong>${d.name}</strong>! Your order details have been sent to SmartHub on WhatsApp.</div>
+      <div class="conf-id">Order ID: <span>${d.orderId}</span></div>
+
+      <div class="wa-redirect-box">
+        <div class="wa-icon">💬</div>
+        <h3>Check your WhatsApp</h3>
+        <p>Your order message has been opened in WhatsApp.</p>
+        <p>Just press <strong>Send</strong> if it did not send automatically.</p>
+        <p style="margin-top:0.5rem;color:#7dd3a8">SmartHub will call you on <strong>${d.phone}</strong> to confirm.</p>
+      </div>
+
+      <div class="conf-note">🚚 Delivery in 2–5 business days<br>📞 We will contact you within 2 hours<br>✅ Payment details will be shared by SmartHub</div>
+      <div class="conf-addr" style="text-align:left">
+        <strong style="color:#fff">${d.name}</strong><br>
+        ${d.addr}, ${d.city}, ${d.state} — ${d.pin}<br>
+        📱 ${d.phone}
+      </div>
+      <button class="btn-continue" onclick="closeModal();cart=[];updateCartUI()">Continue Shopping 🛍️</button>
+    </div>`;
+
+  if (!currentBuyProduct) { cart=[]; updateCartUI(); }
+  currentBuyProduct=null; window._od=null;
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 2800);
+}
+
+renderProducts(products);
+</script>
 </body>
 </html>
