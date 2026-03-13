@@ -308,171 +308,39 @@ footer{background:#000;border-top:1px solid var(--border);padding:2.5rem 1.5rem 
 <script>
 const OWNER_PHONE = '918481944109';
 
-const SVGS = {
-  iphone: `<svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="25" y="5" width="70" height="110" rx="12" fill="#1a1a2e" stroke="#555" stroke-width="2"/>
-    <rect x="30" y="14" width="60" height="88" rx="4" fill="#0f3460"/>
-    <rect x="45" y="7" width="30" height="5" rx="2.5" fill="#333"/>
-    <circle cx="60" cy="109" r="4" fill="#333"/>
-    <rect x="33" y="17" width="54" height="82" rx="2" fill="#16213e"/>
-    <rect x="36" y="25" width="48" height="35" rx="2" fill="#0a2040"/>
-    <circle cx="60" cy="42" r="10" fill="#1a3a6c" stroke="#4a9eff" stroke-width="1.5"/>
-    <circle cx="60" cy="42" r="4" fill="#4a9eff"/>
-    <rect x="36" y="65" width="20" height="14" rx="2" fill="#1a3a6c"/>
-    <rect x="60" y="65" width="24" height="14" rx="2" fill="#1a3a6c"/>
-    <rect x="36" y="83" width="48" height="8" rx="2" fill="#1a3a6c"/>
-    <rect x="25" y="30" width="4" height="12" rx="2" fill="#333"/>
-    <rect x="25" y="46" width="4" height="8" rx="2" fill="#333"/>
-    <rect x="91" y="35" width="4" height="14" rx="2" fill="#333"/>
-  </svg>`,
-  android: `<svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="22" y="4" width="76" height="112" rx="10" fill="#1a1a2e" stroke="#555" stroke-width="2"/>
-    <rect x="28" y="14" width="64" height="90" rx="3" fill="#0d1b2a"/>
-    <rect x="44" y="6" width="32" height="5" rx="2.5" fill="#333"/>
-    <rect x="56" y="108" width="8" height="3" rx="1.5" fill="#333"/>
-    <rect x="31" y="17" width="58" height="84" rx="2" fill="#0a1628"/>
-    <circle cx="60" cy="45" r="18" fill="#1a3050" stroke="#2a82c0" stroke-width="1.5"/>
-    <path d="M52 45 L60 38 L68 45 L68 55 L52 55 Z" fill="#2a82c0" opacity="0.6"/>
-    <circle cx="60" cy="47" r="5" fill="#2a82c0"/>
-    <rect x="31" y="74" width="26" height="16" rx="2" fill="#1a3050"/>
-    <rect x="63" y="74" width="26" height="16" rx="2" fill="#1a3050"/>
-    <rect x="22" y="32" width="4" height="10" rx="2" fill="#333"/>
-    <rect x="22" y="46" width="4" height="7" rx="2" fill="#333"/>
-    <rect x="94" y="36" width="4" height="14" rx="2" fill="#333"/>
-  </svg>`,
-  macbook: `<svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="10" y="18" width="100" height="66" rx="4" fill="#2a2a2a" stroke="#555" stroke-width="1.5"/>
-    <rect x="15" y="23" width="90" height="56" rx="2" fill="#0d1b35"/>
-    <rect x="18" y="26" width="84" height="50" rx="1" fill="#081525"/>
-    <circle cx="60" cy="51" r="14" fill="#1a3a6c" stroke="#4a9eff" stroke-width="1.5"/>
-    <path d="M54 51 L58 47 L66 51 L62 55 Z" fill="#4a9eff"/>
-    <rect x="5" y="84" width="110" height="6" rx="2" fill="#2a2a2a" stroke="#555" stroke-width="1"/>
-    <rect x="42" y="84.5" width="36" height="4" rx="2" fill="#3a3a3a"/>
-    <rect x="18" y="34" width="30" height="20" rx="1" fill="#0f2540"/>
-    <rect x="52" y="34" width="50" height="9" rx="1" fill="#0f2540"/>
-    <rect x="52" y="46" width="50" height="9" rx="1" fill="#0f2540"/>
-    <rect x="18" y="58" width="84" height="4" rx="1" fill="#0f2540"/>
-    <rect x="18" y="65" width="60" height="4" rx="1" fill="#0f2540"/>
-  </svg>`,
-  laptop: `<svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="8" y="15" width="104" height="70" rx="4" fill="#1e1e1e" stroke="#666" stroke-width="1.5"/>
-    <rect x="13" y="20" width="94" height="60" rx="2" fill="#0a1628"/>
-    <rect x="16" y="23" width="88" height="54" rx="1" fill="#060f1e"/>
-    <rect x="20" y="27" width="40" height="28" rx="1" fill="#0d2040"/>
-    <rect x="64" y="27" width="36" height="13" rx="1" fill="#0d2040"/>
-    <rect x="64" y="43" width="36" height="12" rx="1" fill="#0d2040"/>
-    <rect x="20" y="58" width="80" height="7" rx="1" fill="#0d2040"/>
-    <rect x="3" y="85" width="114" height="8" rx="3" fill="#1e1e1e" stroke="#666" stroke-width="1"/>
-    <rect x="38" y="85.5" width="44" height="6" rx="2" fill="#2a2a2a"/>
-    <circle cx="60" cy="16" r="2" fill="#555"/>
-  </svg>`,
-  fridge: `<svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="25" y="5" width="70" height="110" rx="6" fill="#2a2a2a" stroke="#555" stroke-width="1.5"/>
-    <line x1="25" y1="48" x2="95" y2="48" stroke="#555" stroke-width="2"/>
-    <rect x="28" y="8" width="64" height="37" rx="3" fill="#1a1a1a"/>
-    <rect x="28" y="51" width="64" height="61" rx="3" fill="#1a1a1a"/>
-    <rect x="80" y="20" width="5" height="18" rx="2.5" fill="#555"/>
-    <rect x="80" y="65" width="5" height="25" rx="2.5" fill="#555"/>
-    <rect x="32" y="58" width="38" height="4" rx="1" fill="#333"/>
-    <rect x="32" y="65" width="30" height="4" rx="1" fill="#333"/>
-    <rect x="32" y="72" width="38" height="4" rx="1" fill="#333"/>
-    <circle cx="38" cy="44" r="3" fill="#60a5fa"/>
-  </svg>`,
-  ac: `<svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="8" y="25" width="104" height="46" rx="6" fill="#2a2a2a" stroke="#555" stroke-width="1.5"/>
-    <rect x="12" y="30" width="96" height="36" rx="3" fill="#1a1a1a"/>
-    <rect x="15" y="33" width="90" height="16" rx="2" fill="#0d1b35"/>
-    <path d="M18 38 Q30 34 42 38 Q54 42 66 38 Q78 34 90 38 Q102 42 105 40" stroke="#4a9eff" stroke-width="1.5" fill="none" stroke-dasharray="3 2"/>
-    <path d="M18 43 Q30 39 42 43 Q54 47 66 43 Q78 39 90 43 Q102 47 105 45" stroke="#4a9eff" stroke-width="1" fill="none" stroke-dasharray="3 2" opacity="0.6"/>
-    <rect x="15" y="52" width="90" height="10" rx="1" fill="#151515"/>
-    <rect x="18" y="54" width="12" height="6" rx="1" fill="#1a3a5c"/>
-    <rect x="34" y="54" width="12" height="6" rx="1" fill="#1a3a5c"/>
-    <circle cx="100" cy="57" r="3" fill="#f0b429"/>
-    <rect x="42" y="71" width="8" height="18" rx="2" fill="#2a2a2a" stroke="#555" stroke-width="1"/>
-    <rect x="70" y="71" width="8" height="18" rx="2" fill="#2a2a2a" stroke="#555" stroke-width="1"/>
-  </svg>`,
-  washer: `<svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="15" y="8" width="90" height="108" rx="6" fill="#2a2a2a" stroke="#555" stroke-width="1.5"/>
-    <rect x="19" y="12" width="82" height="22" rx="3" fill="#1a1a1a"/>
-    <circle cx="75" cy="23" r="5" fill="#1a3a5c" stroke="#4a9eff" stroke-width="1"/>
-    <circle cx="90" cy="23" r="5" fill="#1a3a5c" stroke="#4a9eff" stroke-width="1"/>
-    <circle cx="60" cy="72" r="30" fill="#1a1a1a" stroke="#555" stroke-width="2"/>
-    <circle cx="60" cy="72" r="24" fill="#0d1b35" stroke="#1a4a6a" stroke-width="1.5"/>
-    <circle cx="60" cy="72" r="10" fill="#1a1a1a" stroke="#4a9eff" stroke-width="1"/>
-    <path d="M44 62 Q52 55 60 58 Q68 61 72 56" stroke="#4a9eff" stroke-width="1.5" fill="none"/>
-  </svg>`,
-  tv: `<svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="5" y="15" width="110" height="68" rx="4" fill="#1a1a1a" stroke="#555" stroke-width="2"/>
-    <rect x="10" y="20" width="100" height="58" rx="2" fill="#0d1b35"/>
-    <rect x="15" y="25" width="90" height="48" rx="1" fill="#080f20"/>
-    <rect x="18" y="28" width="40" height="42" rx="1" fill="#0a1828"/>
-    <circle cx="38" cy="49" r="12" fill="#1a2a40" stroke="#2a6aaa" stroke-width="1"/>
-    <polygon points="34,44 34,54 46,49" fill="#2a6aaa"/>
-    <rect x="62" y="28" width="42" height="6" rx="1" fill="#1a2840"/>
-    <rect x="62" y="37" width="42" height="6" rx="1" fill="#1a2840"/>
-    <rect x="62" y="46" width="42" height="6" rx="1" fill="#1a2840"/>
-    <rect x="40" y="83" width="40" height="7" rx="2" fill="#1a1a1a" stroke="#555" stroke-width="1"/>
-    <rect x="30" y="90" width="60" height="4" rx="2" fill="#1a1a1a" stroke="#555" stroke-width="1"/>
-    <circle cx="107" cy="20" r="2.5" fill="#f0b429"/>
-  </svg>`,
-  headphones: `<svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M20 60 C20 35 38 18 60 18 C82 18 100 35 100 60" stroke="#555" stroke-width="5" fill="none" stroke-linecap="round"/>
-    <rect x="10" y="55" width="20" height="34" rx="10" fill="#1a1a1a" stroke="#888" stroke-width="1.5"/>
-    <rect x="90" y="55" width="20" height="34" rx="10" fill="#1a1a1a" stroke="#888" stroke-width="1.5"/>
-    <rect x="14" y="62" width="12" height="20" rx="6" fill="#2a2a2a"/>
-    <rect x="94" y="62" width="12" height="20" rx="6" fill="#2a2a2a"/>
-    <circle cx="20" cy="72" r="4" fill="#f0b429" opacity="0.5"/>
-    <circle cx="100" cy="72" r="4" fill="#f0b429" opacity="0.5"/>
-  </svg>`,
-  speaker: `<svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="20" y="25" width="80" height="70" rx="12" fill="#1a1a1a" stroke="#555" stroke-width="2"/>
-    <circle cx="60" cy="62" r="24" fill="#111" stroke="#444" stroke-width="1.5"/>
-    <circle cx="60" cy="62" r="18" fill="#0a0a0a" stroke="#333" stroke-width="1"/>
-    <circle cx="60" cy="62" r="10" fill="#1a1a1a" stroke="#555" stroke-width="1.5"/>
-    <circle cx="60" cy="62" r="4" fill="#555"/>
-    <rect x="26" y="32" width="10" height="6" rx="3" fill="#f0b429"/>
-  </svg>`,
-  earbuds: `<svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="15" y="20" width="90" height="80" rx="12" fill="#1a1a1a" stroke="#555" stroke-width="1.5"/>
-    <line x1="60" y1="20" x2="60" y2="100" stroke="#333" stroke-width="1.5"/>
-    <ellipse cx="35" cy="55" rx="14" ry="22" fill="#2a2a2a" stroke="#666" stroke-width="1.5"/>
-    <ellipse cx="35" cy="55" rx="8" ry="13" fill="#111"/>
-    <circle cx="35" cy="55" r="1.5" fill="#f0b429"/>
-    <ellipse cx="85" cy="65" rx="14" ry="22" fill="#2a2a2a" stroke="#666" stroke-width="1.5"/>
-    <ellipse cx="85" cy="65" rx="8" ry="13" fill="#111"/>
-    <circle cx="85" cy="65" r="1.5" fill="#f0b429"/>
-    <circle cx="60" cy="95" r="2" fill="#f0b429"/>
-  </svg>`,
-  hub: `<svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="15" y="40" width="90" height="40" rx="8" fill="#1a1a1a" stroke="#555" stroke-width="1.5"/>
-    <rect x="20" y="46" width="80" height="28" rx="4" fill="#111"/>
-    <rect x="24" y="52" width="12" height="8" rx="2" fill="#333" stroke="#555" stroke-width="1"/>
-    <rect x="40" y="52" width="12" height="8" rx="2" fill="#333" stroke="#555" stroke-width="1"/>
-    <rect x="56" y="52" width="12" height="8" rx="2" fill="#1a3a5c" stroke="#4a9eff" stroke-width="1"/>
-    <rect x="72" y="52" width="12" height="8" rx="2" fill="#1a3a5c" stroke="#4a9eff" stroke-width="1"/>
-    <circle cx="26" cy="64" r="2" fill="#f0b429"/>
-    <circle cx="42" cy="64" r="2" fill="#f0b429"/>
-    <circle cx="58" cy="64" r="2" fill="#4a9eff"/>
-    <circle cx="74" cy="64" r="2" fill="#4a9eff"/>
-  </svg>`,
-  charger: `<svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="30" y="20" width="60" height="60" rx="12" fill="#1a1a1a" stroke="#555" stroke-width="2"/>
-    <rect x="38" y="30" width="44" height="40" rx="6" fill="#111"/>
-    <path d="M52 45 L60 35 L60 50 L68 50 L60 62 L60 47 Z" fill="#f0b429"/>
-    <rect x="46" y="80" width="10" height="18" rx="3" fill="#2a2a2a" stroke="#555" stroke-width="1"/>
-    <rect x="64" y="80" width="10" height="18" rx="3" fill="#2a2a2a" stroke="#555" stroke-width="1"/>
-  </svg>`,
-  powerbank: `<svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="20" y="30" width="80" height="60" rx="10" fill="#1a1a1a" stroke="#555" stroke-width="2"/>
-    <rect x="25" y="35" width="70" height="50" rx="6" fill="#111"/>
-    <rect x="28" y="47" width="44" height="16" rx="3" fill="#1a3a5c" stroke="#2a6aff" stroke-width="0.5"/>
-    <rect x="28" y="47" width="32" height="16" rx="3" fill="#1a4a7c"/>
-    <circle cx="36" cy="73" r="4" fill="#f0b429" opacity="0.8"/>
-    <circle cx="50" cy="73" r="4" fill="#f0b429" opacity="0.5"/>
-    <circle cx="64" cy="73" r="4" fill="#333"/>
-    <path d="M55 40 L60 33 L60 42 L65 42 L60 49 L60 40 Z" fill="#f0b429" opacity="0.7"/>
-  </svg>`,
-};
+const products = [
+{ id:1,name:'iPhone 15 128GB',brand:'Apple',cat:'mobile',
+img:'https://m.media-amazon.com/images/I/71d7rfSl0wL._SX679_.jpg',
+price:71999,orig:79999,rating:4.8,reviews:3241,badge:'DEAL'},
+
+{ id:2,name:'Samsung Galaxy S24',brand:'Samsung',cat:'mobile',
+img:'https://m.media-amazon.com/images/I/71L2iBSyyOL._SX679_.jpg',
+price:64999,orig:74999,rating:4.7,reviews:2187,badge:'HOT'},
+
+{ id:3,name:'OnePlus 12 256GB',brand:'OnePlus',cat:'mobile',
+img:'https://m.media-amazon.com/images/I/71Y2SiHnqCL._SX679_.jpg',
+price:54999,orig:61999,rating:4.6,reviews:1843,badge:''},
+
+{ id:4,name:'Redmi Note 13 Pro',brand:'Xiaomi',cat:'mobile',
+img:'https://m.media-amazon.com/images/I/71E5zB1qbIL._SX679_.jpg',
+price:24999,orig:29999,rating:4.5,reviews:5621,badge:'BEST'},
+
+{ id:5,name:'MacBook Air M3',brand:'Apple',cat:'laptop',
+img:'https://m.media-amazon.com/images/I/71f5Eu5lJSL._SX679_.jpg',
+price:99990,orig:114900,rating:4.9,reviews:1521,badge:'DEAL'},
+
+{ id:6,name:'Dell XPS 15',brand:'Dell',cat:'laptop',
+img:'https://m.media-amazon.com/images/I/61y7C3JrHfL._SX679_.jpg',
+price:119990,orig:139990,rating:4.7,reviews:876,badge:''},
+
+{ id:7,name:'HP Pavilion 15',brand:'HP',cat:'laptop',
+img:'https://m.media-amazon.com/images/I/71fLQeHnYbL._SX679_.jpg',
+price:54999,orig:64999,rating:4.5,reviews:2341,badge:'HOT'},
+
+{ id:8,name:'Lenovo IdeaPad 5',brand:'Lenovo',cat:'laptop',
+img:'https://m.media-amazon.com/images/I/61QGMXv4FGL._SX679_.jpg',
+price:47999,orig:55999,rating:4.4,reviews:1987,badge:''}
+];
 
 const products = [
   {id:1,  name:'iPhone 15 128GB',       brand:'Apple',      cat:'mobile',    svgKey:'iphone',     price:71999,  orig:79999,  rating:4.8, reviews:3241,  badge:'DEAL'},
