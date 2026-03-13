@@ -534,28 +534,38 @@ const SVGS = {
 };
 
 const products = [
-  {id:1,  name:'iPhone 15 128GB',       brand:'Apple',      cat:'mobile',    svgKey:'iphone',     price:71999,  orig:79999,  rating:4.8, reviews:3241,  badge:'DEAL'},
-  {id:2,  name:'Samsung Galaxy S24',    brand:'Samsung',    cat:'mobile',    svgKey:'android',    price:64999,  orig:74999,  rating:4.7, reviews:2187,  badge:'HOT'},
-  {id:3,  name:'OnePlus 12 256GB',      brand:'OnePlus',    cat:'mobile',    svgKey:'android',    price:54999,  orig:61999,  rating:4.6, reviews:1843,  badge:''},
-  {id:4,  name:'Redmi Note 13 Pro',     brand:'Xiaomi',     cat:'mobile',    svgKey:'android',    price:24999,  orig:29999,  rating:4.5, reviews:5621,  badge:'BEST'},
-  {id:5,  name:'MacBook Air M3',        brand:'Apple',      cat:'laptop',    svgKey:'macbook',    price:99990,  orig:114900, rating:4.9, reviews:1521,  badge:'DEAL'},
-  {id:6,  name:'Dell XPS 15',           brand:'Dell',       cat:'laptop',    svgKey:'laptop',     price:119990, orig:139990, rating:4.7, reviews:876,   badge:''},
-  {id:7,  name:'HP Pavilion 15',        brand:'HP',         cat:'laptop',    svgKey:'laptop',     price:54999,  orig:64999,  rating:4.5, reviews:2341,  badge:'HOT'},
-  {id:8,  name:'Lenovo IdeaPad 5',      brand:'Lenovo',     cat:'laptop',    svgKey:'laptop',     price:47999,  orig:55999,  rating:4.4, reviews:1987,  badge:''},
-  {id:9,  name:'Samsung 253L Fridge',   brand:'Samsung',    cat:'appliance', svgKey:'fridge',     price:34990,  orig:51490,  rating:4.6, reviews:987,   badge:'32% OFF'},
-  {id:10, name:'LG 5 Star 1.5T AC',    brand:'LG',         cat:'appliance', svgKey:'ac',         price:34999,  orig:44999,  rating:4.7, reviews:1432,  badge:'HOT'},
-  {id:11, name:'Whirlpool 7kg Washer',  brand:'Whirlpool',  cat:'appliance', svgKey:'washer',     price:22999,  orig:29999,  rating:4.4, reviews:1234,  badge:''},
-  {id:12, name:'Haier 320L Fridge',    brand:'Haier',      cat:'appliance', svgKey:'fridge',     price:29499,  orig:39999,  rating:4.3, reviews:765,   badge:'DEAL'},
-  {id:13, name:'Sony 55" 4K Smart TV', brand:'Sony',       cat:'tv',        svgKey:'tv',         price:69990,  orig:89990,  rating:4.8, reviews:2100,  badge:'22% OFF'},
-  {id:14, name:'LG 43" WebOS TV',      brand:'LG',         cat:'tv',        svgKey:'tv',         price:34999,  orig:44999,  rating:4.5, reviews:1654,  badge:''},
-  {id:15, name:'Sony WH-1000XM5',      brand:'Sony',       cat:'audio',     svgKey:'headphones', price:18999,  orig:31990,  rating:4.9, reviews:4321,  badge:'40% OFF'},
-  {id:16, name:'JBL Flip 6 Speaker',   brand:'JBL',        cat:'audio',     svgKey:'speaker',    price:8999,   orig:12999,  rating:4.7, reviews:3210,  badge:'HOT'},
-  {id:17, name:'Tech Hub Pro Series',  brand:'SmartHub',   cat:'gadget',    svgKey:'hub',        price:8999,   orig:12499,  rating:4.8, reviews:2847,  badge:'28% OFF'},
-  {id:18, name:'boAt Airdopes 141',    brand:'boAt',       cat:'audio',     svgKey:'earbuds',    price:1299,   orig:3990,   rating:4.3, reviews:87432, badge:'NEW'},
-  {id:19, name:'Mi 65W Fast Charger',  brand:'Xiaomi',     cat:'gadget',    svgKey:'charger',    price:1299,   orig:1999,   rating:4.5, reviews:12543, badge:''},
-  {id:20, name:'Portronics Power Bank',brand:'Portronics', cat:'gadget',    svgKey:'powerbank',  price:1899,   orig:2999,   rating:4.4, reviews:8765,  badge:'NEW'},
-];
+{ id:1,name:'iPhone 15 128GB',brand:'Apple',cat:'mobile',
+img:'https://m.media-amazon.com/images/I/71d7rfSl0wL._SX679_.jpg',
+price:71999,orig:79999,rating:4.8,reviews:3241,badge:'DEAL'},
 
+{ id:2,name:'Samsung Galaxy S24',brand:'Samsung',cat:'mobile',
+img:'https://m.media-amazon.com/images/I/71L2iBSyyOL._SX679_.jpg',
+price:64999,orig:74999,rating:4.7,reviews:2187,badge:'HOT'},
+
+{ id:3,name:'OnePlus 12 256GB',brand:'OnePlus',cat:'mobile',
+img:'https://m.media-amazon.com/images/I/71Y2SiHnqCL._SX679_.jpg',
+price:54999,orig:61999,rating:4.6,reviews:1843,badge:''},
+
+{ id:4,name:'Redmi Note 13 Pro',brand:'Xiaomi',cat:'mobile',
+img:'https://m.media-amazon.com/images/I/71E5zB1qbIL._SX679_.jpg',
+price:24999,orig:29999,rating:4.5,reviews:5621,badge:'BEST'},
+
+{ id:5,name:'MacBook Air M3',brand:'Apple',cat:'laptop',
+img:'https://m.media-amazon.com/images/I/71f5Eu5lJSL._SX679_.jpg',
+price:99990,orig:114900,rating:4.9,reviews:1521,badge:'DEAL'},
+
+{ id:6,name:'Dell XPS 15',brand:'Dell',cat:'laptop',
+img:'https://m.media-amazon.com/images/I/61y7C3JrHfL._SX679_.jpg',
+price:119990,orig:139990,rating:4.7,reviews:876,badge:''},
+
+{ id:7,name:'HP Pavilion 15',brand:'HP',cat:'laptop',
+img:'https://m.media-amazon.com/images/I/71fLQeHnYbL._SX679_.jpg',
+price:54999,orig:64999,rating:4.5,reviews:2341,badge:'HOT'},
+
+{ id:8,name:'Lenovo IdeaPad 5',brand:'Lenovo',cat:'laptop',
+img:'https://m.media-amazon.com/images/I/61QGMXv4FGL._SX679_.jpg',
+price:47999,orig:55999,rating:4.4,reviews:1987,badge:''}
+];
 let cart = [], activeCat = 'all', currentBuyProduct = null;
 
 function getSVG(key) { return SVGS[key] || SVGS.hub; }
