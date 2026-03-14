@@ -1031,12 +1031,20 @@ footer{
   cursor:zoom-in;
   margin-bottom:1rem;
 }
+.pdp-main-img #pdpMainSvg{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  height:100%;
+}
 .pdp-main-img svg{
   width:260px;
   height:260px;
   transition:transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
 }
 .pdp-main-img:hover svg{transform:scale(1.15)}
+.pdp-main-img:hover #pdpMainPhoto{transform:scale(1.06)!important}
 .pdp-main-img::before{
   content:'';
   position:absolute;
@@ -2826,8 +2834,10 @@ function openPDP(pid) {
   const realImgs = REAL_IMGS[p.id] || null;
   const mainEl = document.getElementById('pdpMainSvg');
   if(realImgs) {
-    mainEl.innerHTML = `<img src="${realImgs[0].src}" style="width:240px;height:260px;object-fit:contain;border-radius:12px;transition:all 0.35s ease;" id="pdpMainPhoto" alt="${p.name}">`;
+    mainEl.style.cssText = 'display:flex;align-items:center;justify-content:center;width:100%;height:100%;';
+    mainEl.innerHTML = `<img id="pdpMainPhoto" src="${realImgs[0].src}" style="max-width:100%;max-height:360px;width:auto;height:auto;object-fit:contain;border-radius:12px;transition:opacity 0.16s ease,transform 0.16s ease;" alt="${p.name}">`;
   } else {
+    mainEl.style.cssText = '';
     mainEl.innerHTML = `<svg viewBox="0 0 120 120" fill="none" style="width:260px;height:260px">${getSVG(p.svgKey).replace(/<svg[^>]*>/,'').replace('</svg>','')}</svg>`;
   }
 
@@ -2835,7 +2845,7 @@ function openPDP(pid) {
   if(realImgs) {
     document.getElementById('pdpThumbs').innerHTML = realImgs.map((img,i)=>`
       <div>
-        <div class="pdp-thumb ${i===0?'active':''}" onclick="selectRealThumb(this,'${img.src.substring(0,30)}...',${i})" data-idx="${i}" data-src="${img.src}">
+        <div class="pdp-thumb ${i===0?'active':''}" onclick="selectRealThumb(this,${p.id},${i})">
           <img src="${img.src}" style="width:100%;height:100%;object-fit:contain;border-radius:6px;" alt="${img.label}">
         </div>
         <div class="pdp-thumb-label">${img.label}</div>
@@ -2942,21 +2952,21 @@ function selectThumb(el) {
   el.classList.add('active');
 }
 
-function selectRealThumb(el, _dummy, idx) {
-  // Get full src from data attribute
-  const src = el.getAttribute('data-src');
+function selectRealThumb(el, productId, idx) {
+  const imgs = REAL_IMGS[productId];
+  if(!imgs || !imgs[idx]) return;
+  const src = imgs[idx].src;
   document.querySelectorAll('.pdp-thumb').forEach(t=>t.classList.remove('active'));
   el.classList.add('active');
   const mainPhoto = document.getElementById('pdpMainPhoto');
-  if(mainPhoto && src) {
-    // Smooth fade transition
+  if(mainPhoto) {
     mainPhoto.style.opacity = '0';
-    mainPhoto.style.transform = 'scale(0.95)';
+    mainPhoto.style.transform = 'scale(0.96)';
     setTimeout(()=>{
       mainPhoto.src = src;
       mainPhoto.style.opacity = '1';
       mainPhoto.style.transform = 'scale(1)';
-    }, 180);
+    }, 160);
   }
 }
 
