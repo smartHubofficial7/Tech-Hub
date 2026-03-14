@@ -37,36 +37,82 @@ body{
   overflow-x:hidden;
 }
 
-/* ─── RICH ANIMATED BACKGROUND ───────────────────────── */
+/* ─── STUNNING BACKGROUND ─────────────────────────────── */
+body{
+  background:
+    radial-gradient(ellipse 120% 80% at 50% -10%, rgba(245,197,24,0.18) 0%, transparent 45%),
+    radial-gradient(ellipse 80% 60% at 100% 50%, rgba(74,158,255,0.10) 0%, transparent 50%),
+    radial-gradient(ellipse 70% 60% at 0% 100%, rgba(46,213,115,0.08) 0%, transparent 50%),
+    #07080f;
+}
 body::before{
   content:'';
   position:fixed;
   inset:0;
   background:
-    radial-gradient(ellipse 90% 60% at 15% 0%,   rgba(245,197,24,0.09) 0%, transparent 55%),
-    radial-gradient(ellipse 70% 50% at 85% 15%,  rgba(74,158,255,0.07) 0%, transparent 50%),
-    radial-gradient(ellipse 60% 70% at 80% 90%,  rgba(245,197,24,0.06) 0%, transparent 55%),
-    radial-gradient(ellipse 50% 40% at 10% 80%,  rgba(46,213,115,0.04) 0%, transparent 50%),
-    radial-gradient(ellipse 100% 100% at 50% 50%, rgba(7,8,15,1) 40%,   transparent 100%);
+    radial-gradient(ellipse 60% 50% at 20% 20%, rgba(245,197,24,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 80% 70%, rgba(74,158,255,0.08) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 50% at 60% 90%, rgba(245,197,24,0.07) 0%, transparent 50%);
   pointer-events:none;
   z-index:0;
-  animation:bgShift 18s ease-in-out infinite alternate;
+  animation:bgFloat 12s ease-in-out infinite alternate;
 }
-@keyframes bgShift{
-  0%  {opacity:1}
-  50% {opacity:0.8}
-  100%{opacity:1}
+@keyframes bgFloat{
+  0%  {transform:scale(1)   translateY(0px)}
+  50% {transform:scale(1.05) translateY(-15px)}
+  100%{transform:scale(1)   translateY(0px)}
 }
+
+/* Dot grid */
 body::after{
   content:'';
   position:fixed;
   inset:0;
-  background-image:
-    radial-gradient(circle, rgba(245,197,24,0.06) 1px, transparent 1px);
-  background-size:44px 44px;
+  background-image:radial-gradient(circle, rgba(245,197,24,0.08) 1px, transparent 1px);
+  background-size:38px 38px;
   pointer-events:none;
   z-index:0;
-  mask-image:radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
+  -webkit-mask-image:
+    radial-gradient(ellipse 90% 70% at 50% 30%, black 0%, transparent 80%);
+  mask-image:
+    radial-gradient(ellipse 90% 70% at 50% 30%, black 0%, transparent 80%);
+}
+
+/* Floating orbs — pure CSS, no JS */
+.bg-orb{
+  position:fixed;
+  border-radius:50%;
+  pointer-events:none;
+  z-index:0;
+  filter:blur(80px);
+  animation:orbFloat linear infinite;
+}
+.bg-orb1{
+  width:500px;height:500px;
+  background:rgba(245,197,24,0.07);
+  top:-100px;left:-100px;
+  animation-duration:25s;
+  animation-direction:alternate;
+}
+.bg-orb2{
+  width:400px;height:400px;
+  background:rgba(74,158,255,0.06);
+  bottom:-80px;right:-80px;
+  animation-duration:20s;
+  animation-direction:alternate-reverse;
+}
+.bg-orb3{
+  width:300px;height:300px;
+  background:rgba(46,213,115,0.05);
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  animation-duration:30s;
+}
+@keyframes orbFloat{
+  0%  {transform:translate(0,0) scale(1)}
+  33% {transform:translate(40px,-30px) scale(1.1)}
+  66% {transform:translate(-20px,40px) scale(0.95)}
+  100%{transform:translate(30px,20px) scale(1.05)}
 }
 /* ─────────────────────────────────────────────────────── */
 
@@ -1651,8 +1697,9 @@ footer{
 </style>
 </head>
 <body>
-
-<div class="topbar">
+<div class="bg-orb bg-orb1"></div>
+<div class="bg-orb bg-orb2"></div>
+<div class="bg-orb bg-orb3"></div>
   <span>🇮🇳 Free shipping above ₹499 · Pan India Delivery</span>
   <span>📞 <a href="https://wa.me/918481944109">WhatsApp: 8481944109</a></span>
 </div>
@@ -2052,11 +2099,64 @@ const products = [
   {id:49, name:'Realme TechLife Watch S',  brand:'Realme',     cat:'gadget',    svgKey:'hub',        price:2999,   orig:4499,   rating:4.2, reviews:9876,  badge:'NEW'},
   {id:50, name:'boAt Wave Call 2',         brand:'boAt',       cat:'gadget',    svgKey:'hub',        price:1999,   orig:3999,   rating:4.1, reviews:15432, badge:''},
   {id:51, name:'Zebronics 10000mAh',       brand:'Zebronics',  cat:'gadget',    svgKey:'powerbank',  price:999,    orig:1799,   rating:4.0, reviews:23456, badge:''},
+
+  // ── EXTRA MOBILES ─────────────────────────────────────
+  {id:52, name:'Vivo V30 Pro 5G',          brand:'Vivo',       cat:'mobile',    svgKey:'android',    price:33999,  orig:39999,  rating:4.4, reviews:3210,  badge:''},
+  {id:53, name:'Oppo Reno 12 Pro',         brand:'Oppo',       cat:'mobile',    svgKey:'android',    price:36999,  orig:44999,  rating:4.3, reviews:2134,  badge:'NEW'},
+  {id:54, name:'Google Pixel 8a',          brand:'Google',     cat:'mobile',    svgKey:'android',    price:44999,  orig:52999,  rating:4.6, reviews:1876,  badge:'HOT'},
+  {id:55, name:'Samsung Galaxy M55 5G',    brand:'Samsung',    cat:'mobile',    svgKey:'android',    price:26999,  orig:32999,  rating:4.3, reviews:6543,  badge:''},
+  {id:56, name:'Tecno Pova 6 Pro',         brand:'Tecno',      cat:'mobile',    svgKey:'android',    price:18999,  orig:23999,  rating:4.1, reviews:8765,  badge:''},
+  {id:57, name:'Infinix Note 40 Pro',      brand:'Infinix',    cat:'mobile',    svgKey:'android',    price:17999,  orig:22999,  rating:4.0, reviews:5432,  badge:'NEW'},
+
+  // ── EXTRA LAPTOPS ─────────────────────────────────────
+  {id:58, name:'Asus VivoBook 15 i5',      brand:'Asus',       cat:'laptop',    svgKey:'laptop',     price:44999,  orig:54999,  rating:4.3, reviews:4321,  badge:''},
+  {id:59, name:'HP Envy x360 Ryzen 7',     brand:'HP',         cat:'laptop',    svgKey:'laptop',     price:74999,  orig:89999,  rating:4.6, reviews:876,   badge:'HOT'},
+  {id:60, name:'Lenovo ThinkPad E14',       brand:'Lenovo',     cat:'laptop',    svgKey:'laptop',     price:62999,  orig:74999,  rating:4.5, reviews:1234,  badge:''},
+
+  // ── EXTRA AUDIO ───────────────────────────────────────
+  {id:61, name:'Noise Buds VS104',          brand:'Noise',      cat:'audio',     svgKey:'earbuds',    price:999,    orig:2999,   rating:4.0, reviews:43210, badge:''},
+  {id:62, name:'Marshall Emberton III',     brand:'Marshall',   cat:'audio',     svgKey:'speaker',    price:14999,  orig:19999,  rating:4.8, reviews:1543,  badge:''},
+  {id:63, name:'Sennheiser HD 450BT',       brand:'Sennheiser', cat:'audio',     svgKey:'headphones', price:9999,   orig:14990,  rating:4.5, reviews:2341,  badge:'HOT'},
+  {id:64, name:'boAt Rockerz 550',          brand:'boAt',       cat:'audio',     svgKey:'headphones', price:1499,   orig:3990,   rating:4.1, reviews:65432, badge:''},
+
+  // ── EXTRA APPLIANCES ──────────────────────────────────
+  {id:65, name:'Blue Star 1T 3 Star AC',    brand:'Blue Star',  cat:'appliance', svgKey:'ac',         price:28999,  orig:36999,  rating:4.4, reviews:1876,  badge:''},
+  {id:66, name:'Godrej 236L Frost Free',    brand:'Godrej',     cat:'appliance', svgKey:'fridge',     price:24490,  orig:31490,  rating:4.2, reviews:2341,  badge:'NEW'},
+  {id:67, name:'Samsung 8kg Front Load',    brand:'Samsung',    cat:'appliance', svgKey:'washer',     price:32990,  orig:41990,  rating:4.5, reviews:1654,  badge:''},
+
+  // ── EXTRA SMART TVs ───────────────────────────────────
+  {id:68, name:'Hisense 55" 4K ULED',      brand:'Hisense',    cat:'tv',        svgKey:'tv',         price:39999,  orig:54999,  rating:4.4, reviews:1234,  badge:'HOT'},
+  {id:69, name:'Vu 43" Premium Android',    brand:'Vu',         cat:'tv',        svgKey:'tv',         price:21999,  orig:29999,  rating:4.1, reviews:4321,  badge:''},
+  {id:70, name:'Realme 55" 4K Smart TV',    brand:'Realme',     cat:'tv',        svgKey:'tv',         price:32999,  orig:44999,  rating:4.3, reviews:2134,  badge:'NEW'},
+
+  // ── EXTRA GADGETS ─────────────────────────────────────
+  {id:71, name:'Noise ColorFit Ultra 3',    brand:'Noise',      cat:'gadget',    svgKey:'hub',        price:3499,   orig:5999,   rating:4.2, reviews:18765, badge:''},
+  {id:72, name:'OnePlus SUPERVOOC 80W',     brand:'OnePlus',    cat:'gadget',    svgKey:'charger',    price:1499,   orig:2299,   rating:4.6, reviews:9876,  badge:'HOT'},
+  {id:73, name:'Ambrane 27000mAh PB',       brand:'Ambrane',    cat:'gadget',    svgKey:'powerbank',  price:1499,   orig:2999,   rating:4.1, reviews:12345, badge:''},
 ];
 
 let cart=[], activeCat='all', currentBuyProduct=null;
 let catpageCurrentCat='', catpageSortMode='default', catpageSubFilter='all';
 function getSVG(k){return SVGS[k]||SVGS.hub}
+
+// ── CART PERSISTENCE (localStorage) ───────────────────────
+function saveCart(){
+  try{ localStorage.setItem('smarthub_cart', JSON.stringify(cart)); }catch(e){}
+}
+function loadCart(){
+  try{
+    const saved = localStorage.getItem('smarthub_cart');
+    if(saved){
+      const parsed = JSON.parse(saved);
+      // Re-attach full product data (in case prices changed)
+      cart = parsed.map(item=>{
+        const fresh = products.find(p=>p.id===item.id);
+        return fresh ? {...fresh, qty:item.qty} : null;
+      }).filter(Boolean);
+    }
+  }catch(e){ cart=[]; }
+  updateCartUI();
+}
 
 // ── CATEGORY META ──────────────────────────────────────────
 const CAT_META = {
@@ -2064,10 +2164,10 @@ const CAT_META = {
     label:'📱 Mobiles',
     title:'Best <span>Smartphones</span>',
     tag:'📱 Top Mobile Deals',
-    sub:'Latest 4G & 5G phones from Apple, Samsung, OnePlus, Xiaomi & more. Best prices guaranteed.',
+    sub:'Latest 4G & 5G phones from Apple, Samsung, OnePlus, Xiaomi, Google & more. Best prices guaranteed.',
     emojis:'📱 📲 💬',
     color:'rgba(74,158,255,0.08)',
-    subcats:['All','Apple','Samsung','OnePlus','Xiaomi','Others'],
+    subcats:['All','Apple','Samsung','OnePlus','Xiaomi','Google','Others'],
   },
   laptop:{
     label:'💻 Laptops',
@@ -2358,19 +2458,30 @@ function addToCart(id){
   const ex=cart.find(x=>x.id===id);
   if(ex) ex.qty++; else cart.push({...p,qty:1});
   updateCartUI();
+  saveCart();
   showToast('🛒 '+p.name+' added!');
 }
-function removeFromCart(id){cart=cart.filter(x=>x.id!==id);updateCartUI()}
+function removeFromCart(id){
+  cart=cart.filter(x=>x.id!==id);
+  updateCartUI();
+  saveCart();
+}
 function changeQty(id,d){
   const item=cart.find(x=>x.id===id);
   if(!item) return;
   item.qty+=d;
-  if(item.qty<=0) removeFromCart(id); else updateCartUI();
+  if(item.qty<=0) removeFromCart(id);
+  else { updateCartUI(); saveCart(); }
 }
 function updateCartUI(){
   const total=cart.reduce((s,x)=>s+x.price*x.qty,0);
   const count=cart.reduce((s,x)=>s+x.qty,0);
   document.getElementById('cartCount').textContent=count;
+  // sync all cart badges
+  ['catCartCount','pdpCartCount'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.textContent=count;
+  });
   const el=document.getElementById('cartItems'),ft=document.getElementById('cartFoot');
   if(!cart.length){
     el.innerHTML='<div class="cart-empty"><div class="cart-empty-icon">🛒</div><p>Your cart is empty</p></div>';
@@ -2498,9 +2609,9 @@ function showConfirmStep(){
         ${d.addr}, ${d.city}, ${d.state} — ${d.pin}<br>
         📱 ${d.phone}
       </div>
-      <button class="btn-continue" onclick="closeModal();cart=[];updateCartUI()">Continue Shopping 🛍️</button>
+      <button class="btn-continue" onclick="closeModal();cart=[];updateCartUI();saveCart()">Continue Shopping 🛍️</button>
     </div>`;
-  if(!currentBuyProduct){cart=[];updateCartUI()}
+  if(!currentBuyProduct){cart=[];updateCartUI();saveCart()}
   currentBuyProduct=null;window._od=null;
 }
 
@@ -2860,6 +2971,7 @@ function renderProducts(list){
 }
 
 renderProducts(products);
+loadCart(); // ← restore cart from localStorage on page load
 </script>
 </body>
 </html>
