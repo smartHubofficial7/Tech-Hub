@@ -908,6 +908,494 @@ footer{
 .footer-logo span{color:var(--white);font-weight:300}
 .footer-copy{color:var(--gray2);font-size:0.75rem}
 
+/* ─── PRODUCT DETAIL PAGE ────────────────────────────────── */
+.pdp-overlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:var(--bg);
+  z-index:600;
+  overflow-y:auto;
+  animation:pdpIn 0.3s ease;
+}
+.pdp-overlay.show{display:block}
+@keyframes pdpIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+.pdp-topbar{
+  display:flex;
+  align-items:center;
+  gap:1rem;
+  padding:1rem 2rem;
+  border-bottom:1px solid var(--border);
+  position:sticky;
+  top:0;
+  background:rgba(7,8,15,0.95);
+  backdrop-filter:blur(16px);
+  z-index:10;
+}
+.pdp-back{
+  display:flex;
+  align-items:center;
+  gap:0.4rem;
+  background:var(--bg3);
+  border:1px solid var(--border);
+  color:var(--gray);
+  padding:0.5rem 1rem;
+  border-radius:0.6rem;
+  cursor:pointer;
+  font-size:0.82rem;
+  font-family:'Outfit',sans-serif;
+  transition:all 0.2s;
+  font-weight:500;
+}
+.pdp-back:hover{border-color:var(--border2);color:var(--white)}
+.pdp-breadcrumb{font-size:0.78rem;color:var(--gray);display:flex;align-items:center;gap:0.4rem}
+.pdp-breadcrumb span{color:var(--white)}
+
+.pdp-body{
+  max-width:1100px;
+  margin:0 auto;
+  padding:2.5rem 2rem;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:3rem;
+  align-items:start;
+}
+
+/* ── Image Viewer ── */
+.pdp-img-section{position:sticky;top:90px}
+.pdp-main-img{
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-radius:1.5rem;
+  height:400px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  overflow:hidden;
+  cursor:zoom-in;
+  margin-bottom:1rem;
+}
+.pdp-main-img svg{
+  width:260px;
+  height:260px;
+  transition:transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+}
+.pdp-main-img:hover svg{transform:scale(1.15)}
+.pdp-main-img::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:radial-gradient(ellipse at center,var(--gold3) 0%,transparent 70%);
+  pointer-events:none;
+}
+.pdp-zoom-hint{
+  position:absolute;
+  bottom:1rem;
+  right:1rem;
+  background:rgba(0,0,0,0.6);
+  border:1px solid var(--border);
+  border-radius:0.5rem;
+  padding:0.3rem 0.6rem;
+  font-size:0.68rem;
+  color:var(--gray);
+  display:flex;
+  align-items:center;
+  gap:0.3rem;
+}
+.pdp-thumbs{display:flex;gap:0.75rem;flex-wrap:wrap}
+.pdp-thumb{
+  width:72px;height:72px;
+  border-radius:0.75rem;
+  background:var(--bg2);
+  border:2px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;
+  transition:all 0.2s;
+  padding:6px;
+}
+.pdp-thumb svg{width:50px;height:50px}
+.pdp-thumb.active,.pdp-thumb:hover{border-color:var(--gold)}
+.pdp-thumb-label{
+  font-size:0.6rem;
+  color:var(--gray);
+  text-align:center;
+  margin-top:0.25rem;
+}
+
+/* ── Info Section ── */
+.pdp-info{}
+.pdp-badges{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1rem}
+.pdp-badge-item{
+  font-size:0.68rem;
+  font-weight:700;
+  padding:0.2rem 0.6rem;
+  border-radius:0.35rem;
+  letter-spacing:0.05em;
+}
+.pdp-badge-item.red{background:var(--red);color:#fff}
+.pdp-badge-item.green{background:var(--green);color:#000}
+.pdp-badge-item.gold{background:var(--gold);color:#000}
+
+.pdp-brand{
+  font-size:0.72rem;
+  font-weight:700;
+  color:var(--gold);
+  text-transform:uppercase;
+  letter-spacing:0.1em;
+  margin-bottom:0.4rem;
+}
+.pdp-title{
+  font-size:1.75rem;
+  font-weight:800;
+  line-height:1.2;
+  letter-spacing:-0.03em;
+  margin-bottom:0.75rem;
+}
+.pdp-rating-row{
+  display:flex;
+  align-items:center;
+  gap:1rem;
+  margin-bottom:1.25rem;
+  padding-bottom:1.25rem;
+  border-bottom:1px solid var(--border);
+}
+.pdp-stars{color:var(--gold);font-size:1rem;letter-spacing:2px}
+.pdp-rating-val{font-weight:800;font-size:0.95rem}
+.pdp-reviews-link{color:var(--gray);font-size:0.82rem;cursor:pointer;text-decoration:underline;text-underline-offset:2px}
+.pdp-reviews-link:hover{color:var(--gold)}
+
+.pdp-price-section{margin-bottom:1.5rem}
+.pdp-price-main{
+  font-size:2.5rem;
+  font-weight:800;
+  letter-spacing:-0.04em;
+  color:var(--white);
+  line-height:1;
+  margin-bottom:0.3rem;
+}
+.pdp-price-row{display:flex;align-items:center;gap:0.875rem;flex-wrap:wrap}
+.pdp-price-orig{font-size:1rem;color:var(--gray2);text-decoration:line-through}
+.pdp-price-save{
+  background:rgba(46,213,115,0.12);
+  border:1px solid rgba(46,213,115,0.3);
+  color:var(--green);
+  font-size:0.82rem;
+  font-weight:700;
+  padding:0.25rem 0.6rem;
+  border-radius:0.4rem;
+}
+.pdp-emi{font-size:0.78rem;color:var(--gray);margin-top:0.4rem}
+.pdp-emi span{color:var(--gold);font-weight:600}
+
+.pdp-highlights{
+  background:var(--bg3);
+  border:1px solid var(--border);
+  border-radius:1rem;
+  padding:1.1rem 1.25rem;
+  margin-bottom:1.5rem;
+}
+.pdp-highlights h4{
+  font-size:0.72rem;
+  font-weight:700;
+  color:var(--gold);
+  text-transform:uppercase;
+  letter-spacing:0.1em;
+  margin-bottom:0.875rem;
+}
+.pdp-highlight-item{
+  display:flex;
+  align-items:flex-start;
+  gap:0.6rem;
+  font-size:0.82rem;
+  color:var(--gray);
+  margin-bottom:0.5rem;
+  line-height:1.5;
+}
+.pdp-highlight-item:last-child{margin-bottom:0}
+.pdp-hi-dot{
+  width:6px;height:6px;
+  border-radius:50%;
+  background:var(--gold);
+  flex-shrink:0;
+  margin-top:0.45rem;
+}
+
+.pdp-actions{display:flex;flex-direction:column;gap:0.75rem;margin-bottom:1.5rem}
+.pdp-btn-buy{
+  width:100%;
+  padding:1rem;
+  background:var(--gold);
+  color:#111;
+  border:none;
+  border-radius:0.875rem;
+  font-size:1rem;
+  font-weight:800;
+  cursor:pointer;
+  font-family:'Outfit',sans-serif;
+  transition:all 0.2s;
+  letter-spacing:0.01em;
+}
+.pdp-btn-buy:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(245,197,24,0.3)}
+.pdp-btn-cart{
+  width:100%;
+  padding:1rem;
+  background:var(--bg3);
+  color:var(--white);
+  border:1.5px solid var(--border);
+  border-radius:0.875rem;
+  font-size:1rem;
+  font-weight:700;
+  cursor:pointer;
+  font-family:'Outfit',sans-serif;
+  transition:all 0.2s;
+}
+.pdp-btn-cart:hover{border-color:var(--border2);color:var(--gold)}
+.pdp-btn-wa{
+  width:100%;
+  padding:0.875rem;
+  background:transparent;
+  color:var(--wa);
+  border:1.5px solid rgba(37,211,102,0.3);
+  border-radius:0.875rem;
+  font-size:0.875rem;
+  font-weight:600;
+  cursor:pointer;
+  font-family:'Outfit',sans-serif;
+  transition:all 0.2s;
+  display:flex;align-items:center;justify-content:center;gap:0.4rem;
+}
+.pdp-btn-wa:hover{background:rgba(37,211,102,0.08);border-color:var(--wa)}
+
+.pdp-trust{
+  display:flex;
+  gap:1rem;
+  flex-wrap:wrap;
+  margin-bottom:1.5rem;
+}
+.pdp-trust-item{
+  display:flex;
+  align-items:center;
+  gap:0.4rem;
+  font-size:0.75rem;
+  color:var(--gray);
+}
+.pdp-trust-item span{font-size:1rem}
+
+/* ── Tabs: Specs + Reviews ── */
+.pdp-tabs-section{
+  grid-column:1 / -1;
+  border-top:1px solid var(--border);
+  padding-top:2.5rem;
+  margin-top:0.5rem;
+}
+.pdp-tabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:2rem}
+.pdp-tab{
+  padding:0.875rem 1.75rem;
+  font-size:0.875rem;
+  font-weight:600;
+  color:var(--gray);
+  cursor:pointer;
+  border-bottom:2px solid transparent;
+  transition:all 0.2s;
+  font-family:'Outfit',sans-serif;
+}
+.pdp-tab.active{color:var(--gold);border-bottom-color:var(--gold)}
+.pdp-tab:hover{color:var(--white)}
+.pdp-tab-content{display:none}
+.pdp-tab-content.active{display:block}
+
+/* Specs */
+.specs-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:1.25rem;
+}
+.spec-group{
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-radius:1rem;
+  overflow:hidden;
+}
+.spec-group-title{
+  padding:0.75rem 1rem;
+  background:var(--bg3);
+  font-size:0.72rem;
+  font-weight:700;
+  color:var(--gold);
+  text-transform:uppercase;
+  letter-spacing:0.08em;
+  border-bottom:1px solid var(--border);
+}
+.spec-row{
+  display:flex;
+  padding:0.6rem 1rem;
+  border-bottom:1px solid var(--border);
+  font-size:0.82rem;
+}
+.spec-row:last-child{border-bottom:none}
+.spec-key{color:var(--gray);width:45%;flex-shrink:0}
+.spec-val{color:var(--white);font-weight:500}
+
+/* Reviews */
+.reviews-header{
+  display:flex;
+  align-items:center;
+  gap:2rem;
+  margin-bottom:2rem;
+  flex-wrap:wrap;
+}
+.review-score-big{
+  text-align:center;
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-radius:1rem;
+  padding:1.5rem 2rem;
+  flex-shrink:0;
+}
+.review-score-num{
+  font-size:3.5rem;
+  font-weight:800;
+  color:var(--gold);
+  letter-spacing:-0.04em;
+  line-height:1;
+  font-family:'Space Mono',monospace;
+}
+.review-score-stars{color:var(--gold);font-size:1.1rem;letter-spacing:2px;margin:0.3rem 0}
+.review-score-count{font-size:0.78rem;color:var(--gray)}
+.review-bars{flex:1;min-width:200px}
+.review-bar-row{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem;font-size:0.78rem}
+.review-bar-lbl{color:var(--gray);width:32px;text-align:right;flex-shrink:0}
+.review-bar-track{flex:1;height:6px;background:var(--bg3);border-radius:3px;overflow:hidden}
+.review-bar-fill{height:100%;background:var(--gold);border-radius:3px;transition:width 0.8s ease}
+.review-bar-count{color:var(--gray2);width:30px;flex-shrink:0}
+
+.reviews-list{display:flex;flex-direction:column;gap:1rem}
+.review-card{
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-radius:1rem;
+  padding:1.25rem;
+  transition:border-color 0.2s;
+}
+.review-card:hover{border-color:var(--border2)}
+.review-top{display:flex;align-items:center;gap:0.875rem;margin-bottom:0.75rem}
+.review-avatar{
+  width:40px;height:40px;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--bg4),var(--bg5));
+  border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;
+  flex-shrink:0;
+}
+.review-meta{flex:1}
+.review-name{font-size:0.875rem;font-weight:700;margin-bottom:0.1rem}
+.review-date{font-size:0.72rem;color:var(--gray2)}
+.review-stars{color:var(--gold);font-size:0.8rem;margin-left:auto}
+.review-verified{
+  font-size:0.68rem;
+  color:var(--green);
+  font-weight:600;
+  background:rgba(46,213,115,0.1);
+  padding:0.15rem 0.4rem;
+  border-radius:0.3rem;
+  margin-left:0.4rem;
+}
+.review-title{font-size:0.875rem;font-weight:700;margin-bottom:0.4rem}
+.review-body{font-size:0.82rem;color:var(--gray);line-height:1.6}
+.review-helpful{
+  display:flex;
+  align-items:center;
+  gap:0.5rem;
+  margin-top:0.75rem;
+  font-size:0.75rem;
+  color:var(--gray2);
+}
+.helpful-btn{
+  background:var(--bg3);
+  border:1px solid var(--border);
+  color:var(--gray);
+  padding:0.2rem 0.6rem;
+  border-radius:0.4rem;
+  cursor:pointer;
+  font-size:0.72rem;
+  font-family:'Outfit',sans-serif;
+  transition:all 0.2s;
+}
+.helpful-btn:hover{border-color:var(--border2);color:var(--gold)}
+
+/* Write Review */
+.write-review-box{
+  background:var(--bg3);
+  border:1px solid var(--border);
+  border-radius:1rem;
+  padding:1.5rem;
+  margin-top:2rem;
+}
+.write-review-box h4{font-size:1rem;font-weight:700;margin-bottom:1rem}
+.star-picker{display:flex;gap:0.4rem;margin-bottom:1rem;cursor:pointer}
+.star-pick{font-size:1.5rem;color:var(--gray2);transition:color 0.15s;line-height:1}
+.star-pick.lit,.star-pick:hover{color:var(--gold)}
+.wr-row{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:0.75rem}
+.wr-input{
+  width:100%;
+  padding:0.65rem 0.875rem;
+  background:var(--bg4);
+  border:1.5px solid var(--border);
+  border-radius:0.75rem;
+  color:var(--white);
+  font-size:0.875rem;
+  font-family:'Outfit',sans-serif;
+  outline:none;
+  transition:border-color 0.2s;
+}
+.wr-input:focus{border-color:var(--gold)}
+.wr-textarea{
+  width:100%;
+  padding:0.65rem 0.875rem;
+  background:var(--bg4);
+  border:1.5px solid var(--border);
+  border-radius:0.75rem;
+  color:var(--white);
+  font-size:0.875rem;
+  font-family:'Outfit',sans-serif;
+  outline:none;
+  transition:border-color 0.2s;
+  resize:vertical;
+  min-height:80px;
+  margin-bottom:0.75rem;
+}
+.wr-textarea:focus{border-color:var(--gold)}
+.btn-submit-review{
+  background:var(--gold);
+  color:#111;
+  border:none;
+  padding:0.7rem 1.5rem;
+  border-radius:0.75rem;
+  font-size:0.875rem;
+  font-weight:700;
+  cursor:pointer;
+  font-family:'Outfit',sans-serif;
+  transition:all 0.2s;
+}
+.btn-submit-review:hover{background:var(--gold2)}
+
+/* Related Products */
+.pdp-related{
+  grid-column: 1 / -1;
+  margin-top:1rem;
+  padding-top:2.5rem;
+  border-top:1px solid var(--border);
+}
+.pdp-related-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+  gap:1rem;
+  margin-top:1.25rem;
+}
+
 /* ─── RESPONSIVE ─────────────────────────────────────────── */
 @media(max-width:768px){
   .topbar{display:none}
@@ -923,6 +1411,16 @@ footer{
   .cart-sidebar{width:100%;right:-100%}
   .frow{grid-template-columns:1fr}
   nav .nav-cats{padding:0 1rem}
+  .pdp-body{grid-template-columns:1fr;gap:2rem;padding:1.5rem 1rem}
+  .pdp-img-section{position:static}
+  .pdp-main-img{height:280px}
+  .pdp-title{font-size:1.35rem}
+  .pdp-price-main{font-size:2rem}
+  .pdp-tabs-section{grid-column:1/-1}
+  .specs-grid{grid-template-columns:1fr}
+  .wr-row{grid-template-columns:1fr}
+  .pdp-topbar{padding:0.75rem 1rem}
+  .reviews-header{flex-direction:column;gap:1rem}
 }
 </style>
 </head>
@@ -1084,6 +1582,119 @@ footer{
 </div>
 
 <div class="toast" id="toast"></div>
+
+<!-- ── PRODUCT DETAIL PAGE OVERLAY ── -->
+<div class="pdp-overlay" id="pdpOverlay">
+  <div class="pdp-topbar">
+    <button class="pdp-back" onclick="closePDP()">← Back</button>
+    <div class="pdp-breadcrumb">SmartHub › <span id="pdpBreadCat"></span> › <span id="pdpBreadName"></span></div>
+    <div style="margin-left:auto;display:flex;gap:0.75rem">
+      <button class="cart-btn" onclick="closePDP();openCart()">🛒 Cart <span class="cart-badge" id="pdpCartCount">0</span></button>
+    </div>
+  </div>
+
+  <div class="pdp-body">
+    <!-- Image Section -->
+    <div class="pdp-img-section">
+      <div class="pdp-main-img" id="pdpMainImg">
+        <div id="pdpMainSvg"></div>
+        <div class="pdp-zoom-hint">🔍 Hover to zoom</div>
+      </div>
+      <div class="pdp-thumbs" id="pdpThumbs"></div>
+    </div>
+
+    <!-- Info Section -->
+    <div class="pdp-info">
+      <div class="pdp-badges" id="pdpBadges"></div>
+      <div class="pdp-brand" id="pdpBrand"></div>
+      <div class="pdp-title" id="pdpTitle"></div>
+      <div class="pdp-rating-row">
+        <span class="pdp-stars" id="pdpStars"></span>
+        <span class="pdp-rating-val" id="pdpRatingVal"></span>
+        <span class="pdp-reviews-link" onclick="switchTab('reviews')" id="pdpReviewsLink"></span>
+      </div>
+
+      <div class="pdp-price-section">
+        <div class="pdp-price-main" id="pdpPriceMain"></div>
+        <div class="pdp-price-row">
+          <span class="pdp-price-orig" id="pdpPriceOrig"></span>
+          <span class="pdp-price-save" id="pdpPriceSave"></span>
+        </div>
+        <div class="pdp-emi" id="pdpEmi"></div>
+      </div>
+
+      <div class="pdp-highlights">
+        <h4>Key Highlights</h4>
+        <div id="pdpHighlights"></div>
+      </div>
+
+      <div class="pdp-actions">
+        <button class="pdp-btn-buy" id="pdpBtnBuy">⚡ Buy Now</button>
+        <button class="pdp-btn-cart" id="pdpBtnCart">🛒 Add to Cart</button>
+        <button class="pdp-btn-wa" onclick="pdpWhatsAppEnquiry()">
+          💬 Enquire on WhatsApp
+        </button>
+      </div>
+
+      <div class="pdp-trust">
+        <div class="pdp-trust-item"><span>🚚</span> Free Delivery above ₹499</div>
+        <div class="pdp-trust-item"><span>✅</span> 100% Genuine Product</div>
+        <div class="pdp-trust-item"><span>🔄</span> Easy Returns</div>
+        <div class="pdp-trust-item"><span>🔒</span> Secure Payment</div>
+      </div>
+    </div>
+
+    <!-- Tabs: Specs + Reviews -->
+    <div class="pdp-tabs-section">
+      <div class="pdp-tabs">
+        <div class="pdp-tab active" onclick="switchTab('specs')">📋 Specifications</div>
+        <div class="pdp-tab" onclick="switchTab('reviews')">⭐ Reviews</div>
+        <div class="pdp-tab" onclick="switchTab('write')">✍️ Write a Review</div>
+      </div>
+
+      <div class="pdp-tab-content active" id="tab-specs">
+        <div class="specs-grid" id="pdpSpecsGrid"></div>
+      </div>
+
+      <div class="pdp-tab-content" id="tab-reviews">
+        <div class="reviews-header">
+          <div class="review-score-big">
+            <div class="review-score-num" id="revScoreNum"></div>
+            <div class="review-score-stars" id="revScoreStars"></div>
+            <div class="review-score-count" id="revScoreCount"></div>
+          </div>
+          <div class="review-bars" id="revBars"></div>
+        </div>
+        <div class="reviews-list" id="reviewsList"></div>
+      </div>
+
+      <div class="pdp-tab-content" id="tab-write">
+        <div class="write-review-box">
+          <h4>Share Your Experience</h4>
+          <div class="star-picker" id="starPicker">
+            <span class="star-pick" onclick="setStars(1)">★</span>
+            <span class="star-pick" onclick="setStars(2)">★</span>
+            <span class="star-pick" onclick="setStars(3)">★</span>
+            <span class="star-pick" onclick="setStars(4)">★</span>
+            <span class="star-pick" onclick="setStars(5)">★</span>
+          </div>
+          <div class="wr-row">
+            <input class="wr-input" id="wrName" placeholder="Your Name *">
+            <input class="wr-input" id="wrTitle" placeholder="Review Title *">
+          </div>
+          <textarea class="wr-textarea" id="wrBody" placeholder="Write your review here... (min 20 characters)"></textarea>
+          <button class="btn-submit-review" onclick="submitReview()">Submit Review →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Related Products -->
+    <div class="pdp-related">
+      <div class="section-title">You May Also <span>Like</span></div>
+      <div class="pdp-related-grid" id="pdpRelated"></div>
+    </div>
+  </div>
+</div>
 
 <script>
 const OWNER_PHONE = '918481944109';
@@ -1383,6 +1994,355 @@ function showToast(msg){
   const t=document.getElementById('toast');
   t.textContent=msg;t.classList.add('show');
   setTimeout(()=>t.classList.remove('show'),2800);
+}
+
+// ── PRODUCT SPECS DATA ─────────────────────────────────────
+const SPECS = {
+  iphone:{
+    'Display':{'Screen Size':'6.1 inch Super Retina XDR','Resolution':'2556 x 1179 px','Refresh Rate':'60 Hz','Type':'OLED'},
+    'Performance':{'Chip':'A16 Bionic','RAM':'6 GB','Storage':'128 GB','OS':'iOS 17'},
+    'Camera':{'Main Camera':'48 MP','Front Camera':'12 MP','Video':'4K @ 30fps','Features':'Night Mode, Portrait'},
+    'Battery':{'Capacity':'3279 mAh','Charging':'20W Fast Charge','Wireless':'MagSafe 15W','Life':'Up to 20 hrs video'},
+    'Connectivity':{'5G':'Yes','WiFi':'Wi-Fi 6','Bluetooth':'5.3','NFC':'Yes','USB':'Lightning'},
+  },
+  android:{
+    'Display':{'Screen Size':'6.7 inch Dynamic AMOLED','Resolution':'2340 x 1080 px','Refresh Rate':'120 Hz','Type':'AMOLED'},
+    'Performance':{'Chip':'Snapdragon 8 Gen 3','RAM':'8 GB','Storage':'256 GB','OS':'Android 14'},
+    'Camera':{'Main Camera':'50 MP Triple','Front Camera':'12 MP','Video':'8K @ 30fps','Features':'AI Zoom, Night Mode'},
+    'Battery':{'Capacity':'5000 mAh','Charging':'45W Super Fast','Wireless':'15W','Life':'Up to 22 hrs video'},
+    'Connectivity':{'5G':'Yes','WiFi':'Wi-Fi 6E','Bluetooth':'5.3','NFC':'Yes','USB':'USB-C 3.2'},
+  },
+  macbook:{
+    'Display':{'Screen Size':'13.6 inch Liquid Retina','Resolution':'2560 x 1664 px','Refresh Rate':'60 Hz','Type':'IPS LCD'},
+    'Performance':{'Chip':'Apple M3','CPU Cores':'8 Core','GPU Cores':'10 Core','RAM':'8 GB Unified'},
+    'Storage':{'SSD':'256 GB SSD','Read Speed':'Up to 3.1 GB/s','Write Speed':'Up to 2.0 GB/s','Type':'NVMe'},
+    'Battery':{'Capacity':'52.6 Wh','Charging':'30W USB-C','MagSafe':'Yes','Life':'Up to 18 hrs'},
+    'Connectivity':{'WiFi':'Wi-Fi 6E','Bluetooth':'5.3','Ports':'2x USB-C Thunderbolt 4','MagSafe':'Yes'},
+  },
+  laptop:{
+    'Display':{'Screen Size':'15.6 inch FHD','Resolution':'1920 x 1080 px','Refresh Rate':'120 Hz','Panel':'IPS Anti-Glare'},
+    'Performance':{'Processor':'Intel Core i7 13th Gen','RAM':'16 GB DDR5','Storage':'512 GB SSD','OS':'Windows 11'},
+    'Graphics':{'GPU':'NVIDIA RTX 4060 8GB','VRAM':'8 GB GDDR6','Type':'Dedicated','API':'DirectX 12'},
+    'Battery':{'Capacity':'86 Wh','Charging':'130W Fast Charge','Life':'Up to 8 hrs','Type':'4-cell Li-ion'},
+    'Connectivity':{'WiFi':'Wi-Fi 6','Bluetooth':'5.1','USB':'3x USB-A, 1x USB-C','HDMI':'Yes'},
+  },
+  fridge:{
+    'Capacity':{'Total Volume':'253 Litres','Refrigerator':'195 L','Freezer':'58 L','Toughened Glass Shelves':'3'},
+    'Performance':{'Star Rating':'3 Star','Annual Energy':'190 kWh','Cooling Technology':'Digital Inverter','Stabilizer':'Yes (built-in)'},
+    'Features':{'Ice Maker':'No','Water Dispenser':'No','Door Alarm':'Yes','Child Lock':'Yes'},
+    'Dimensions':{'Height':'155 cm','Width':'60 cm','Depth':'67 cm','Weight':'52 kg'},
+    'Warranty':{'Compressor':'10 Years','Product':'1 Year','Service':'Nationwide'},
+  },
+  ac:{
+    'Cooling':{'Capacity':'1.5 Ton','Star Rating':'5 Star','Annual Energy':'728 kWh','ISEER Rating':'5.20'},
+    'Performance':{'Compressor':'Dual Inverter','Cooling Speed':'Fast','Auto Restart':'Yes','Stabilizer':'Built-in'},
+    'Features':{'Wi-Fi':'Yes','Voice Control':'Alexa / Google','Sleep Mode':'Yes','Auto Clean':'Yes'},
+    'Dimensions':{'Indoor (H×W×D)':'25×89×33 cm','Outdoor':'54×80×29 cm','Pipe Length':'5 m','Weight Indoor':'10 kg'},
+    'Warranty':{'Product':'1 Year','Compressor':'10 Years','PCB':'5 Years'},
+  },
+  washer:{
+    'Capacity':{'Load':'7 kg','Type':'Front Load','Configuration':'Freestanding','Color':'White'},
+    'Performance':{'Motor':'Inverter Direct Drive','Max RPM':'1400 rpm','Programs':'15','Temperature':'20°C–90°C'},
+    'Features':{'Delay Start':'Yes','Child Lock':'Yes','Smart Diagnosis':'Yes','Self-Clean':'Yes'},
+    'Dimensions':{'H×W×D':'85×60×55 cm','Weight':'69 kg','Hose Length':'1.5 m'},
+    'Warranty':{'Product':'2 Years','Motor':'10 Years','Service':'Nationwide'},
+  },
+  tv:{
+    'Display':{'Screen Size':'55 inch 4K UHD','Resolution':'3840 x 2160 px','Panel':'X1 4K Processor','HDR':'Dolby Vision, HDR10'},
+    'Smart Features':{'OS':'Google TV','Google Assistant':'Built-in','Chromecast':'Built-in','Apps':'Netflix, YouTube, Prime'},
+    'Audio':{'Output':'20W','Dolby Audio':'Yes','Dolby Atmos':'Yes','Speakers':'2.0 Ch'},
+    'Connectivity':{'HDMI':'4 (1 eARC)','USB':'2','Bluetooth':'5.0','WiFi':'Wi-Fi 5','Ethernet':'Yes'},
+    'Dimensions':{'Without Stand (H×W)':'72×124 cm','Weight Without Stand':'18 kg'},
+  },
+  headphones:{
+    'Sound':{'Driver Size':'30 mm','Frequency':'4 Hz – 40,000 Hz','Impedance':'48 Ohm','Sensitivity':'101 dB/mW'},
+    'ANC':{'Type':'Industry-leading ANC','Modes':'ANC, Ambient, Off','Microphones':'8 (4 feed-forward, 4 feedback)'},
+    'Battery':{'Battery Life':'30 hrs (ANC on)','Charging':'USB-C, 3.5 hr full','Quick Charge':'10 min = 5 hrs','Standby':'200 hrs'},
+    'Connectivity':{'Bluetooth':'5.2','Codec':'LDAC, SBC, AAC','Range':'10 m','Multi-device':'2 devices','Wired':'3.5mm'},
+    'Design':{'Weight':'250 g','Foldable':'Yes','Color':'Black / Silver','Carrying Case':'Yes'},
+  },
+  speaker:{
+    'Audio':{'Output Power':'30W RMS','Frequency':'65 Hz – 20,000 Hz','Drivers':'2× Racetrack + Passive Radiator'},
+    'Features':{'PartyBoost':'Yes (link multiple)','Waterproof':'IP67','Dustproof':'Yes','Speakerphone':'Yes'},
+    'Battery':{'Playtime':'12 hrs','Charging':'USB-C','Charge Time':'2.5 hrs'},
+    'Connectivity':{'Bluetooth':'5.3','Range':'10 m','AUX':'3.5mm','USB':'Charge only'},
+    'Dimensions':{'Weight':'540 g','Height':'18 cm','Diameter':'7 cm'},
+  },
+  earbuds:{
+    'Sound':{'Driver':'10 mm Dynamic','Frequency':'20 Hz – 20 kHz','Impedance':'32 Ohm','Codec':'SBC, AAC'},
+    'Battery':{'Earbud Battery':'5 hrs','Case Battery':'20 hrs total','Charging':'USB-C','Quick Charge':'10 min = 75 min play'},
+    'Features':{'IPX4':'Water Resistant','Touch Control':'Yes','Voice Assistant':'Yes','Mono Mode':'Yes'},
+    'Connectivity':{'Bluetooth':'5.0','Range':'10 m','Latency':'Low Latency Mode'},
+    'Design':{'Weight (each)':'5 g','Case Weight':'37 g','Ear Tips':'3 sizes included'},
+  },
+  hub:{
+    'Ports':{'USB-A 3.0':'2×','USB-C PD':'1× (100W)','HDMI 4K':'1×','SD Card':'1×','Micro SD':'1×'},
+    'Performance':{'USB Speed':'5 Gbps','HDMI':'4K @ 60Hz','PD Pass-through':'100W','Simultaneous Use':'Yes'},
+    'Compatibility':{'Windows':'✓','macOS':'✓','ChromeOS':'✓','Plug & Play':'Yes (no driver)'},
+    'Dimensions':{'Length':'12 cm','Width':'3.5 cm','Cable Length':'20 cm','Weight':'90 g'},
+    'Warranty':{'Product':'1 Year','Service':'Online'},
+  },
+  charger:{
+    'Output':{'Max Power':'65W GaN','Ports':'2× USB-C + 1× USB-A','Protocol':'PD 3.0, QC 4.0','Simultaneous':'3 devices'},
+    'Compatibility':{'MacBook':'✓ (up to 65W)','iPhone':'✓ (20W)','Android':'✓ (65W)','Universal':'Yes'},
+    'Safety':{'Over-voltage':'✓','Over-current':'✓','Over-temp':'✓','Short Circuit':'✓'},
+    'Dimensions':{'Weight':'130 g','Size':'6.5 × 6.5 × 3.5 cm','Cable':'Not included'},
+    'Warranty':{'Product':'1 Year'},
+  },
+  powerbank:{
+    'Capacity':{'mAh':'20,000 mAh','Wh':'74 Wh','Charges iPhone':'~4.5×','Charges Android':'~3.5×'},
+    'Input':{'USB-C':'18W PD','Micro USB':'10W','Dual Input':'Yes','Recharge Time':'~4 hrs'},
+    'Output':{'USB-C':'20W PD','USB-A 1':'18W QC 3.0','USB-A 2':'10W','Simultaneous':'3 devices'},
+    'Features':{'Display':'LED Indicator','Pass-through':'Yes','Airline Safe':'Yes (< 100Wh)'},
+    'Dimensions':{'Weight':'380 g','Size':'16.5 × 7.7 × 2.2 cm'},
+  },
+};
+
+// ── REVIEWS DATA ────────────────────────────────────────────
+const BASE_REVIEWS = {
+  iphone:[
+    {name:'Priya S.',avatar:'👩',title:'Best phone I have ever used!',body:'The camera quality is outstanding. Portrait mode is superb and Night Mode photos are brilliant. Battery lasts a full day easily. 100% worth every rupee.',stars:5,date:'Feb 2026',helpful:43,verified:true},
+    {name:'Arun M.',avatar:'👨',title:'Great but expensive',body:'Performance is top notch — no lag at all even with heavy apps. Face ID works perfectly. My only complaint is the price, but quality justifies it.',stars:4,date:'Jan 2026',helpful:21,verified:true},
+    {name:'Sneha K.',avatar:'👩',title:'Superb camera!',body:'Switched from Android and I am not going back. The ecosystem is so smooth. iMessage, AirDrop all work seamlessly. Camera is way better than my old Samsung.',stars:5,date:'Dec 2025',helpful:17,verified:false},
+  ],
+  android:[
+    {name:'Rahul D.',avatar:'👨',title:'Excellent Android flagship',body:'The display is absolutely gorgeous. 120Hz refresh makes everything buttery smooth. Camera performance in daylight is top class. Highly recommend.',stars:5,date:'Feb 2026',helpful:38,verified:true},
+    {name:'Pooja T.',avatar:'👩',title:'Good phone, heating issue',body:'Performance is great for gaming and daily use. But the phone gets warm during long gaming sessions. Battery life is excellent — easily 1.5 days.',stars:4,date:'Jan 2026',helpful:29,verified:true},
+  ],
+  macbook:[
+    {name:'Vikram R.',avatar:'👨',title:'M3 is absolutely incredible',body:'The speed is unreal. Compiling code, video editing, running VMs — everything is fast and silent. Battery genuinely lasts 15+ hours. Best laptop I have owned.',stars:5,date:'Feb 2026',helpful:67,verified:true},
+    {name:'Anita J.',avatar:'👩',title:'Perfect for creative work',body:'I do photo and video editing professionally. This handles 4K ProRes footage without breaking a sweat. The display color accuracy is stunning.',stars:5,date:'Dec 2025',helpful:31,verified:true},
+  ],
+};
+
+// Generate generic reviews for products without specific ones
+function getReviews(product) {
+  if(BASE_REVIEWS[product.svgKey]) return BASE_REVIEWS[product.svgKey];
+  return [
+    {name:'Kavya P.',avatar:'👩',title:`Great ${product.name}!`,body:`Really happy with this purchase. ${product.brand} quality is excellent. Works perfectly as described. Delivery was fast too. Would definitely recommend to friends.`,stars:5,date:'Feb 2026',helpful:24,verified:true},
+    {name:'Arjun M.',avatar:'👨',title:'Good value for money',body:`Solid product at this price point. Build quality feels premium. Performance meets expectations. Minor issue with packaging but product itself is great.`,stars:4,date:'Jan 2026',helpful:16,verified:true},
+    {name:'Riya S.',avatar:'👩',title:'Satisfied customer',body:`Ordered it for my family and everyone is happy. Easy to set up and use. ${product.brand} after-sales service is also responsive.`,stars:4,date:'Dec 2025',helpful:11,verified:false},
+  ];
+}
+
+// ── PRODUCT HIGHLIGHTS ─────────────────────────────────────
+const HIGHLIGHTS = {
+  iphone:['A16 Bionic chip — fastest ever in a smartphone','48 MP Main Camera with Photonic Engine','Dynamic Island for live notifications & activities','Emergency SOS via Satellite','Ceramic Shield — tough as any phone glass','iOS 17 with StandBy & NameDrop'],
+  android:['Snapdragon 8 Gen 3 — flagship performance','200 MP main camera with Space Optical Zoom','6.8" QD-AMOLED with 120Hz & 2600 nits peak','5000 mAh with 45W Super Fast Charging','IP68 water resistance — up to 2m for 30 min','Android 14 with 4 OS updates guaranteed'],
+  macbook:['Apple M3 chip — crazy fast CPU & GPU','Up to 18 hours battery life — all day, every day','Liquid Retina display with 500 nits brightness','MagSafe charging + 2 Thunderbolt 4 ports','Touch ID fingerprint sensor built in','Fanless, completely silent design'],
+  laptop:['13th Gen Intel Core i7 — blazing performance','NVIDIA RTX 4060 — great for gaming & creative work','16 GB DDR5 RAM — handle any multitasking','512 GB NVMe SSD — fast storage, fast boot','15.6" FHD IPS 120Hz anti-glare display','Backlit keyboard with fingerprint reader'],
+};
+function getHighlights(p) {
+  return HIGHLIGHTS[p.svgKey] || [`${p.brand} quality build and finish`,`Ideal for everyday use at home or office`,`Energy efficient and cost effective`,`Easy setup — ready to use out of box`,`Pan India warranty and service network`,`Excellent customer ratings (${p.rating}/5 stars)`];
+}
+
+// ── PDP STATE ──────────────────────────────────────────────
+let currentPDP = null, selectedStars = 0, userReviews = {};
+
+function openPDP(pid) {
+  const p = products.find(x=>x.id===pid);
+  if(!p) return;
+  currentPDP = p;
+  const save = Math.round((1-p.price/p.orig)*100);
+  const reviews = [...getReviews(p), ...(userReviews[p.id]||[])];
+  const avgRating = reviews.reduce((s,r)=>s+r.stars,0)/reviews.length;
+
+  // Breadcrumb
+  document.getElementById('pdpBreadCat').textContent = p.cat.charAt(0).toUpperCase()+p.cat.slice(1);
+  document.getElementById('pdpBreadName').textContent = p.name;
+
+  // Badge
+  const badgeHtml = p.badge ? `<span class="pdp-badge-item ${p.badge==='NEW'?'green':p.badge==='DEAL'?'gold':'red'}">${p.badge}</span>`:'';
+  document.getElementById('pdpBadges').innerHTML = badgeHtml + `<span class="pdp-badge-item green">In Stock</span><span class="pdp-badge-item gold">Free Delivery</span>`;
+
+  document.getElementById('pdpBrand').textContent = p.brand;
+  document.getElementById('pdpTitle').textContent = p.name;
+  document.getElementById('pdpStars').textContent = '★'.repeat(Math.floor(p.rating))+'☆'.repeat(5-Math.floor(p.rating));
+  document.getElementById('pdpRatingVal').textContent = p.rating + '/5';
+  document.getElementById('pdpReviewsLink').textContent = `${p.reviews.toLocaleString()} ratings`;
+
+  document.getElementById('pdpPriceMain').textContent = '₹'+p.price.toLocaleString();
+  document.getElementById('pdpPriceOrig').textContent = '₹'+p.orig.toLocaleString();
+  document.getElementById('pdpPriceSave').textContent = save+'% off — You save ₹'+(p.orig-p.price).toLocaleString();
+  const emi = Math.round(p.price/12);
+  document.getElementById('pdpEmi').innerHTML = `EMI from <span>₹${emi.toLocaleString()}/month</span> (No Cost EMI available)`;
+
+  // Main image
+  document.getElementById('pdpMainSvg').innerHTML = `<svg viewBox="0 0 120 120" fill="none" style="width:260px;height:260px">${getSVG(p.svgKey).replace(/<svg[^>]*>/,'').replace('</svg>','')}</svg>`;
+
+  // Thumbnails — show 3 "angle" views (same svg, different label)
+  const thumbLabels = ['Front','Side','Back'];
+  document.getElementById('pdpThumbs').innerHTML = thumbLabels.map((lbl,i)=>`
+    <div>
+      <div class="pdp-thumb ${i===0?'active':''}" onclick="selectThumb(this)">${getSVG(p.svgKey)}</div>
+      <div class="pdp-thumb-label">${lbl}</div>
+    </div>`).join('');
+
+  // Highlights
+  const hl = getHighlights(p);
+  document.getElementById('pdpHighlights').innerHTML = hl.map(h=>`<div class="pdp-highlight-item"><div class="pdp-hi-dot"></div><span>${h}</span></div>`).join('');
+
+  // Actions
+  document.getElementById('pdpBtnBuy').onclick = ()=>{closePDP();startOrder(p.id)};
+  document.getElementById('pdpBtnCart').onclick = ()=>{addToCart(p.id);document.getElementById('pdpCartCount').textContent=cart.reduce((s,x)=>s+x.qty,0)};
+
+  // Specs
+  const specs = SPECS[p.svgKey] || {};
+  document.getElementById('pdpSpecsGrid').innerHTML = Object.entries(specs).map(([group,rows])=>`
+    <div class="spec-group">
+      <div class="spec-group-title">${group}</div>
+      ${Object.entries(rows).map(([k,v])=>`<div class="spec-row"><span class="spec-key">${k}</span><span class="spec-val">${v}</span></div>`).join('')}
+    </div>`).join('') || '<p style="color:var(--gray)">Specifications coming soon.</p>';
+
+  // Reviews
+  renderReviews(p, reviews);
+
+  // Related products (same category, exclude current)
+  const related = products.filter(x=>x.cat===p.cat&&x.id!==p.id).slice(0,4);
+  document.getElementById('pdpRelated').innerHTML = related.map(rp=>{
+    const rs=Math.round((1-rp.price/rp.orig)*100);
+    return `<div class="product-card" onclick="openPDP(${rp.id})" style="cursor:pointer">
+      <div class="prod-img">${getSVG(rp.svgKey)}</div>
+      <div class="prod-body">
+        <div class="prod-brand">${rp.brand}</div>
+        <div class="prod-name">${rp.name}</div>
+        <div class="prod-price">
+          <span class="prod-price-main">₹${rp.price.toLocaleString()}</span>
+          <span class="prod-price-save">${rs}% off</span>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+
+  // Reset tabs
+  switchTab('specs');
+  selectedStars = 0;
+  renderStarPicker(0);
+
+  // Update cart badge on PDP
+  document.getElementById('pdpCartCount').textContent = cart.reduce((s,x)=>s+x.qty,0);
+
+  // Show overlay
+  document.getElementById('pdpOverlay').classList.add('show');
+  document.getElementById('pdpOverlay').scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+}
+
+function renderReviews(p, reviews) {
+  const avgRating = reviews.reduce((s,r)=>s+r.stars,0)/reviews.length;
+  document.getElementById('revScoreNum').textContent = avgRating.toFixed(1);
+  document.getElementById('revScoreStars').textContent = '★'.repeat(Math.round(avgRating))+'☆'.repeat(5-Math.round(avgRating));
+  document.getElementById('revScoreCount').textContent = reviews.length+' ratings';
+
+  // Bar chart
+  const counts = [5,4,3,2,1].map(s=>({star:s,count:reviews.filter(r=>r.stars===s).length}));
+  const max = Math.max(...counts.map(c=>c.count),1);
+  document.getElementById('revBars').innerHTML = counts.map(c=>`
+    <div class="review-bar-row">
+      <span class="review-bar-lbl">${c.star}★</span>
+      <div class="review-bar-track"><div class="review-bar-fill" style="width:${(c.count/max*100)}%"></div></div>
+      <span class="review-bar-count">${c.count}</span>
+    </div>`).join('');
+
+  document.getElementById('reviewsList').innerHTML = reviews.map(r=>`
+    <div class="review-card">
+      <div class="review-top">
+        <div class="review-avatar">${r.avatar}</div>
+        <div class="review-meta">
+          <div class="review-name">${r.name}${r.verified?'<span class="review-verified">✓ Verified</span>':''}</div>
+          <div class="review-date">${r.date}</div>
+        </div>
+        <div class="review-stars">${'★'.repeat(r.stars)}${'☆'.repeat(5-r.stars)}</div>
+      </div>
+      <div class="review-title">${r.title}</div>
+      <div class="review-body">${r.body}</div>
+      <div class="review-helpful">Helpful? <button class="helpful-btn" onclick="this.textContent='👍 Thanks!'">👍 Yes (${r.helpful})</button></div>
+    </div>`).join('');
+}
+
+function closePDP() {
+  document.getElementById('pdpOverlay').classList.remove('show');
+  document.body.style.overflow = '';
+  currentPDP = null;
+}
+
+function selectThumb(el) {
+  document.querySelectorAll('.pdp-thumb').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+}
+
+function switchTab(tab) {
+  document.querySelectorAll('.pdp-tab').forEach((t,i)=>{
+    const tabs = ['specs','reviews','write'];
+    t.classList.toggle('active', tabs[i]===tab);
+  });
+  document.querySelectorAll('.pdp-tab-content').forEach(c=>c.classList.remove('active'));
+  document.getElementById('tab-'+tab).classList.add('active');
+}
+
+function setStars(n) {
+  selectedStars = n;
+  renderStarPicker(n);
+}
+function renderStarPicker(n) {
+  document.querySelectorAll('.star-pick').forEach((s,i)=>s.classList.toggle('lit', i<n));
+}
+
+function submitReview() {
+  if(!currentPDP) return;
+  const name = document.getElementById('wrName').value.trim();
+  const title = document.getElementById('wrTitle').value.trim();
+  const body = document.getElementById('wrBody').value.trim();
+  if(!name||!title||!body||!selectedStars){showToast('⚠️ Fill all fields and pick a star rating!');return}
+  if(body.length<20){showToast('⚠️ Review too short! Min 20 characters.');return}
+  if(!userReviews[currentPDP.id]) userReviews[currentPDP.id]=[];
+  userReviews[currentPDP.id].unshift({name,avatar:'🙂',title,body,stars:selectedStars,date:'Just now',helpful:0,verified:false});
+  const allReviews = [...getReviews(currentPDP),...(userReviews[currentPDP.id]||[])];
+  renderReviews(currentPDP, allReviews);
+  switchTab('reviews');
+  document.getElementById('wrName').value='';
+  document.getElementById('wrTitle').value='';
+  document.getElementById('wrBody').value='';
+  selectedStars=0; renderStarPicker(0);
+  showToast('✅ Review submitted! Thank you.');
+}
+
+function pdpWhatsAppEnquiry() {
+  if(!currentPDP) return;
+  const msg = encodeURIComponent(`Hi SmartHub! I am interested in *${currentPDP.name}* (₹${currentPDP.price.toLocaleString()}). Please share more details and payment options. Thank you!`);
+  window.open(`https://wa.me/${OWNER_PHONE}?text=${msg}`,'_blank');
+}
+
+// Override product card click to open PDP
+function renderProducts(list){
+  const g=document.getElementById('prodGrid');
+  document.getElementById('prodCount').textContent=list.length+' products';
+  g.innerHTML=list.map(p=>{
+    const save=Math.round((1-p.price/p.orig)*100);
+    const badgeClass = p.badge==='NEW'?' new-badge':(p.badge==='DEAL'?' deal-badge':'');
+    const bHtml=p.badge?`<div class="prod-badge${badgeClass}">${p.badge}</div>`:'';
+    return `<div class="product-card">
+      ${bHtml}
+      <div class="prod-img" onclick="openPDP(${p.id})" style="cursor:pointer">${getSVG(p.svgKey)}</div>
+      <div class="prod-body" onclick="openPDP(${p.id})" style="cursor:pointer">
+        <div class="prod-brand">${p.brand}</div>
+        <div class="prod-name">${p.name}</div>
+        <div class="prod-rating">
+          <span class="prod-stars">${'★'.repeat(Math.floor(p.rating))}${'☆'.repeat(5-Math.floor(p.rating))}</span>
+          <span class="prod-rcount">(${p.reviews.toLocaleString()})</span>
+        </div>
+        <div class="prod-price">
+          <span class="prod-price-main">₹${p.price.toLocaleString()}</span>
+          <span class="prod-price-orig">₹${p.orig.toLocaleString()}</span>
+          <span class="prod-price-save">${save}% off</span>
+        </div>
+      </div>
+      <div class="prod-actions">
+        <button class="btn-add" onclick="addToCart(${p.id})">+ Cart</button>
+        <button class="btn-buy-now" onclick="startOrder(${p.id})">Buy Now</button>
+      </div>
+    </div>`;
+  }).join('');
 }
 
 renderProducts(products);
