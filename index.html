@@ -2543,6 +2543,102 @@ footer::after{
   text-shadow:0 1px 2px rgba(0,0,0,0.8);
 }
 
+
+/* ══════════════════════════════════════════
+   CONTACT & ABOUT SIDEBARS
+══════════════════════════════════════════ */
+.info-sidebar{
+  position:fixed;top:0;right:-440px;
+  width:min(420px,100vw);height:100vh;
+  background:linear-gradient(180deg,var(--bg2) 0%,var(--bg) 100%);
+  border-left:1px solid rgba(245,197,24,0.12);
+  z-index:400;
+  transition:right 0.4s cubic-bezier(0.22,1,0.36,1);
+  display:flex;flex-direction:column;
+  box-shadow:-20px 0 60px rgba(0,0,0,0.5);
+  overflow-y:auto;
+}
+.info-sidebar.open{right:0}
+.info-sidebar::-webkit-scrollbar{width:3px}
+.info-sidebar::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px}
+.info-head{
+  padding:1.5rem 1.5rem 1.25rem;
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(245,197,24,0.03);
+  position:sticky;top:0;z-index:1;
+  backdrop-filter:blur(10px);
+}
+.info-head h2{font-size:1.15rem;font-weight:800;letter-spacing:-0.02em}
+.info-body{padding:1.5rem;flex:1;display:flex;flex-direction:column;gap:1.25rem}
+
+/* Info cards inside sidebar */
+.info-card{
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:1rem;
+  padding:1.25rem;
+  transition:border-color 0.2s;
+}
+.info-card:hover{border-color:rgba(245,197,24,0.25)}
+.info-card-icon{font-size:1.75rem;margin-bottom:0.6rem}
+.info-card-title{
+  font-size:0.72rem;font-weight:700;
+  color:var(--gray);text-transform:uppercase;
+  letter-spacing:0.08em;margin-bottom:0.4rem;
+}
+.info-card-val{
+  font-size:0.9rem;font-weight:600;color:var(--white);
+  line-height:1.5;
+}
+.info-card-val a{
+  color:var(--gold);text-decoration:none;
+  transition:opacity 0.2s;
+}
+.info-card-val a:hover{opacity:0.75}
+
+/* Email copy button */
+.copy-email-btn{
+  display:inline-flex;align-items:center;gap:0.4rem;
+  background:rgba(245,197,24,0.08);
+  border:1px solid rgba(245,197,24,0.2);
+  color:var(--gold);border-radius:0.5rem;
+  padding:0.4rem 0.875rem;font-size:0.78rem;
+  font-weight:600;font-family:'Outfit',sans-serif;
+  cursor:pointer;transition:all 0.2s;margin-top:0.6rem;
+}
+.copy-email-btn:hover{background:rgba(245,197,24,0.15);transform:translateY(-1px)}
+
+/* About description */
+.about-desc{
+  font-size:0.875rem;color:rgba(255,255,255,0.75);
+  line-height:1.75;
+}
+.about-badge{
+  display:inline-flex;align-items:center;gap:0.4rem;
+  background:rgba(245,197,24,0.08);
+  border:1px solid rgba(245,197,24,0.2);
+  border-radius:2rem;padding:0.3rem 0.875rem;
+  font-size:0.72rem;font-weight:700;
+  color:var(--gold);letter-spacing:0.05em;
+  margin-bottom:1rem;
+}
+.about-features{display:flex;flex-direction:column;gap:0.6rem;margin-top:0.75rem}
+.about-feature-row{
+  display:flex;align-items:center;gap:0.75rem;
+  font-size:0.82rem;color:rgba(255,255,255,0.75);
+}
+.about-feature-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--gold);flex-shrink:0;
+}
+.info-overlay-bg{
+  display:none;position:fixed;inset:0;
+  background:rgba(0,0,0,0.6);
+  backdrop-filter:blur(4px);
+  z-index:399;
+}
+.info-overlay-bg.show{display:block}
 </style>
 </head>
 <body>
@@ -2563,6 +2659,7 @@ footer::after{
 <div class="topbar">
   <span>🇮🇳 Free shipping above 2 product · Pan India Delivery · 3–5 Day Dispatch</span>
   <span>✅ 100% Genuine Products · Easy Returns</span>
+  <span style="display:flex;gap:1rem"><span style="cursor:pointer;color:var(--gold)" onclick="openAbout()">About</span><span style="cursor:pointer;color:var(--gold)" onclick="openContact()">Contact</span></span>
 </div>
 
 <nav>
@@ -4879,8 +4976,114 @@ function injectStockBadges(){
 
 
 
+
+/* ══════════════════════════════════════════════════════
+   CONTACT & ABOUT SIDEBAR FUNCTIONS
+══════════════════════════════════════════════════════ */
+function openContact(){
+  document.getElementById('contactSidebar').classList.add('open');
+  document.getElementById('aboutSidebar').classList.remove('open');
+  document.getElementById('infoOverlayBg').classList.add('show');
+  document.body.style.overflow='hidden';
+}
+function openAbout(){
+  document.getElementById('aboutSidebar').classList.add('open');
+  document.getElementById('contactSidebar').classList.remove('open');
+  document.getElementById('infoOverlayBg').classList.add('show');
+  document.body.style.overflow='hidden';
+}
+function closeInfoSidebars(){
+  document.getElementById('contactSidebar').classList.remove('open');
+  document.getElementById('aboutSidebar').classList.remove('open');
+  document.getElementById('infoOverlayBg').classList.remove('show');
+  document.body.style.overflow='';
+}
+function copyEmail(){
+  navigator.clipboard.writeText('smarthubofficial777@gmail.com').then(()=>{
+    showToast('📋 Email copied!');
+  }).catch(()=>{
+    showToast('smarthubofficial777@gmail.com');
+  });
+}
 </script>
 
+
+
+<!-- Info overlay bg -->
+<div class="info-overlay-bg" id="infoOverlayBg" onclick="closeInfoSidebars()"></div>
+
+<!-- CONTACT SIDEBAR -->
+<div class="info-sidebar" id="contactSidebar">
+  <div class="info-head">
+    <h2>📞 Contact Us</h2>
+    <button class="modal-close" onclick="closeInfoSidebars()">✕</button>
+  </div>
+  <div class="info-body">
+
+    <div class="info-card">
+      <div class="info-card-icon">📧</div>
+      <div class="info-card-title">Email Address</div>
+      <div class="info-card-val">smarthubofficial777@gmail.com</div>
+      <button class="copy-email-btn" onclick="copyEmail()">📋 Copy Email</button>
+    </div>
+
+    <div class="info-card">
+      <div class="info-card-icon">💬</div>
+      <div class="info-card-title">WhatsApp Support</div>
+      <div class="info-card-val">Chat with us directly on WhatsApp for quick help & order queries.</div>
+      <a href="https://chat.whatsapp.com/Cyw0Nsw3OaG1VHagnZDSap" target="_blank" style="display:inline-flex;align-items:center;gap:0.4rem;background:rgba(37,211,102,0.1);border:1px solid rgba(37,211,102,0.25);color:#25D366;border-radius:0.5rem;padding:0.45rem 0.875rem;font-size:0.78rem;font-weight:600;text-decoration:none;margin-top:0.6rem;transition:all 0.2s">💬 Open WhatsApp</a>
+    </div>
+
+    <div class="info-card">
+      <div class="info-card-icon">🕐</div>
+      <div class="info-card-title">Support Hours</div>
+      <div class="info-card-val">Monday – Saturday<br>10:00 AM – 7:00 PM IST</div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-card-icon">📦</div>
+      <div class="info-card-title">Order & Delivery</div>
+      <div class="info-card-val">Pan India delivery · 3–5 day dispatch · 100% Genuine Products</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ABOUT SIDEBAR -->
+<div class="info-sidebar" id="aboutSidebar">
+  <div class="info-head">
+    <h2>ℹ️ About SmartHub</h2>
+    <button class="modal-close" onclick="closeInfoSidebars()">✕</button>
+  </div>
+  <div class="info-body">
+
+    <div>
+      <div class="about-badge">🇮🇳 India's #1 Tech Store</div>
+      <p class="about-desc">Tech Hub is a modern technology showcase platform where users can explore the latest gadgets and electronic products. Our website is designed to help users easily discover mobile phones, laptops, and other technology products in a simple and user-friendly interface.</p>
+      <br>
+      <p class="about-desc">We believe that technology should be easy and accessible for everyone. That's why we aim to provide a clean and organized platform where users can quickly browse and explore different products.</p>
+    </div>
+
+    <div class="info-card">
+      <div class="info-card-icon">🎯</div>
+      <div class="info-card-title">What We Offer</div>
+      <div class="about-features">
+        <div class="about-feature-row"><div class="about-feature-dot"></div>Latest Mobiles, Laptops & Gadgets</div>
+        <div class="about-feature-row"><div class="about-feature-dot"></div>100% Genuine Products</div>
+        <div class="about-feature-row"><div class="about-feature-dot"></div>Pan India Delivery</div>
+        <div class="about-feature-row"><div class="about-feature-dot"></div>Easy WhatsApp Ordering</div>
+        <div class="about-feature-row"><div class="about-feature-dot"></div>Best Prices Guaranteed</div>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-card-icon">📧</div>
+      <div class="info-card-title">Get In Touch</div>
+      <div class="info-card-val"><a href="mailto:smarthubofficial777@gmail.com">smarthubofficial777@gmail.com</a></div>
+    </div>
+
+  </div>
+</div>
 
 </body>
 </html>
